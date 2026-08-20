@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>travel</title>
+<style>
+:root{--bg:#0d0f0d;--ink:#e8ece6;--mut:#9aa396;--dim:#5c655a;--a1:#a3c46b;--a2:#8fb0c9;
+ --line:rgba(232,236,230,.10);--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;overflow:hidden}
+#c{position:fixed;inset:0;display:block}
+.ui{position:fixed;z-index:10;pointer-events:none}
+#top{top:0;left:0;right:0;padding:18px 22px;display:flex;gap:14px;align-items:baseline;
+ background:linear-gradient(180deg,rgba(13,15,13,.92),transparent)}
+#top h1{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em}
+#top .s{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+#modes{position:fixed;top:16px;right:22px;z-index:11;display:flex;gap:5px;pointer-events:auto}
+#modes button{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+ background:rgba(232,236,230,.05);color:var(--mut);border:1px solid var(--line);
+ border-radius:20px;padding:7px 15px;cursor:pointer;transition:.16s}
+#modes button:hover{color:var(--ink);border-color:var(--a1)}
+#modes button.on{background:linear-gradient(120deg,rgba(163,196,107,.30),rgba(143,176,201,.22));color:var(--ink);border-color:transparent}
+#stats{position:fixed;left:22px;bottom:20px;z-index:11;display:flex;gap:22px;pointer-events:none}
+#stats div{font-family:var(--mono)}
+#stats b{display:block;font-size:24px;font-weight:600;color:var(--a1);letter-spacing:-.02em}
+#stats span{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+#tip{position:fixed;z-index:12;background:rgba(13,15,13,.94);border:1px solid var(--line);
+ border-radius:9px;padding:8px 12px;font-size:12px;pointer-events:none;opacity:0;transition:opacity .12s;
+ max-width:230px}
+#tip b{color:var(--a1)}
+#hint{position:fixed;right:22px;bottom:20px;z-index:11;font-family:var(--mono);font-size:9px;
+ letter-spacing:.12em;text-transform:uppercase;color:var(--dim);pointer-events:none;text-align:right}
+#load{position:fixed;inset:0;display:grid;place-items:center;z-index:20;background:var(--bg);
+ font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+</style></head><body>
+<canvas id="c"></canvas>
+<div class="ui" id="top"><h1>travel</h1><span class="s" id="sub">loading</span></div>
+<div id="modes"><button data-m="globe" class="on">Globe</button><button data-m="us">USA</button><button data-m="co">Colorado</button></div>
+<div id="stats"></div>
+<div id="tip"></div>
+<div id="hint">drag orbit · scroll zoom · click a marker</div>
+<div id="load">building the world</div>
+
+<script type="importmap">
+{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js",
+"three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { PARKS } from "./parks.js";
+import { elev, BOUNDS } from "./terrain.js";
+
+const cv = document.getElementById("c");
+const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0d0f0d);
+scene.fog = new THREE.FogExp2(0x0d0f0d, 0.055);
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 2000);
+const controls = new OrbitControls(camera, cv);
+controls.enableDamping = true; controls.dampingFactor = 0.07;
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+const sun = new THREE.DirectionalLight(0xfff2d8, 1.25);
+sun.position.set(-40, 70, 45); scene.add(sun);
+scene.add(new THREE.HemisphereLight(0x94b8d8, 0x1a1f18, 0.5));
+
+let DATA = null, group = new THREE.Group(), markers = [], mode = "globe";
+scene.add(group);
+
+function clear() {
+  while (group.children.length) {
+    const o = group.children.pop();
+    o.geometry?.dispose(); o.material?.dispose?.();
+  }
+  markers = [];
+}
+function resize() {
+  const w = innerWidth, h = innerHeight;
+  renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
+}
+addEventListener("resize", resize);
+
+/* ── GLOBE ───────────────────────────────────────────────────────────────── */
+async function buildGlobe() {
+  clear();
+  const R = 10;
+  const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(R, 96, 96),
+    new THREE.MeshStandardMaterial({ color: 0x11242e, roughness: .85, metalness: .1 }));
+  group.add(sphere);
+  group.add(new THREE.Mesh(new THREE.SphereGeometry(R * 1.02, 64, 64),
+    new THREE.MeshBasicMaterial({ color: 0x2f6d8a, transparent: true, opacity: .07 })));
+
+  // Real country outlines. Works here because GitHub Pages allows fetch — the reason this
+  // repo exists instead of living inside the Cowork artifact.
+  const topo = await fetch("https://unpkg.com/world-atlas@2/countries-110m.json").then(r => r.json());
+  const { objects, arcs, transform } = topo;
+  const [sx, sy] = transform.scale, [tx, ty] = transform.translate;
+  const decode = a => { let x = 0, y = 0; return a.map(d => { x += d[0]; y += d[1]; return [x * sx + tx, y * sy + ty]; }); };
+  const ring = i => i >= 0 ? decode(arcs[i]) : decode(arcs[~i]).slice().reverse();
+  const ll2v = (lon, lat, r) => {
+    const p = (90 - lat) * Math.PI / 180, t = (lon + 180) * Math.PI / 180;
+    return new THREE.Vector3(-r * Math.sin(p) * Math.cos(t), r * Math.cos(p), r * Math.sin(p) * Math.sin(t));
+  };
+  const visited = new Set(DATA.countriesVisited);
+  const nameOf = g => g.properties?.name || "";
+  for (const geo of objects.countries.geometries) {
+    const on = visited.has(nameOf(geo));
+    const polys = geo.type === "Polygon" ? [geo.arcs] : geo.arcs;
+    for (const poly of polys) for (const lr of poly) {
+      const pts = [];
+      for (const ai of lr) for (const c of ring(ai)) pts.push(ll2v(c[0], c[1], R * 1.004));
+      if (pts.length < 2) continue;
+      group.add(new THREE.Line(
+        new THREE.BufferGeometry().setFromPoints(pts),
+        new THREE.LineBasicMaterial({
+          color: on ? 0xa3c46b : 0x3c4a3a,
+          transparent: true, opacity: on ? .95 : .5 })));
+    }
+  }
+  for (const c of DATA.cities) {
+    const m = new THREE.Mesh(new THREE.SphereGeometry(.075, 12, 12),
+      new THREE.MeshBasicMaterial({ color: 0xa3c46b }));
+    m.position.copy(ll2v(c.lon, c.lat, R * 1.015));
+    m.userData = { label: c.name, sub: "city" };
+    group.add(m); markers.push(m);
+  }
+  camera.position.set(14, 9, 20); controls.target.set(0, 0, 0);
+  stats([[DATA.countriesVisited.length, "countries"], [DATA.cities.length, "cities"], [4, "of 7 continents"]]);
+}
+
+/* ── TERRAIN ─────────────────────────────────────────────────────────────── */
+function buildTerrain(which) {
+  clear();
+  const b = BOUNDS[which], N = which === "co" ? 200 : 260, M = which === "co" ? 150 : 150;
+  const kx = Math.cos(((b[0] + b[1]) / 2) * Math.PI / 180);
+  const spanX = (b[3] - b[2]) * kx, spanY = (b[1] - b[0]);
+  const S = 60 / Math.max(spanX, spanY);
+  const vert = which === "co" ? 0.00055 : 0.00042;
+  const geo = new THREE.PlaneGeometry(spanX * S, spanY * S, N, M);
+  const pos = geo.attributes.position;
+  const col = [];
+  const hmin = which === "co" ? 3300 : 0, hmax = which === "co" ? 14440 : 14505;
+  for (let i = 0; i < pos.count; i++) {
+    const px = pos.getX(i), py = pos.getY(i);
+    const lon = b[2] + ((px / (spanX * S)) + .5) * (b[3] - b[2]);
+    const lat = b[0] + ((py / (spanY * S)) + .5) * (b[1] - b[0]);
+    const h = elev(lat, lon, which);
+    pos.setZ(i, h * vert * S * 10);
+    const t = Math.max(0, Math.min(1, (h - hmin) / (hmax - hmin)));
+    // green valleys → tan mid → grey rock → white above treeline
+    const c = t < .30 ? [.18 + t * .3, .30 + t * .4, .16 + t * .2]
+            : t < .58 ? [.42 + t * .3, .44 + t * .22, .26]
+            : t < .80 ? [.52, .50, .46]
+                      : [.80 + t * .18, .82 + t * .16, .84 + t * .14];
+    col.push(c[0], c[1], c[2]);
+  }
+  geo.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
+  geo.computeVertexNormals();
+  const mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({
+    vertexColors: true, roughness: .95, metalness: .02, flatShading: false }));
+  mesh.rotation.x = -Math.PI / 2;
+  group.add(mesh);
+
+  const visited = new Set(DATA.parksVisited);
+  const inView = PARKS.filter(p => p.lat >= b[0] && p.lat <= b[1] && p.lon >= b[2] && p.lon <= b[3]);
+  for (const p of inView) {
+    const on = visited.has(p.name);
+    const x = ((p.lon - (b[2] + b[3]) / 2) * kx) * S;
+    const z = -((p.lat - (b[0] + b[1]) / 2)) * S;
+    const y = elev(p.lat, p.lon, which) * vert * S * 10;
+    const pin = new THREE.Mesh(
+      new THREE.ConeGeometry(on ? .34 : .2, on ? 1.5 : .9, 10),
+      new THREE.MeshBasicMaterial({ color: on ? 0xa3c46b : 0x6a7566,
+        transparent: !on, opacity: on ? 1 : .55 }));
+    pin.position.set(x, y + (on ? .9 : .55), z);
+    pin.userData = { label: p.name, sub: p.state + " · " + Math.round(elev(p.lat, p.lon, which)) + " ft" };
+    group.add(pin); markers.push(pin);
+    if (on) {
+      const halo = new THREE.Mesh(new THREE.SphereGeometry(.55, 14, 14),
+        new THREE.MeshBasicMaterial({ color: 0xa3c46b, transparent: true, opacity: .16 }));
+      halo.position.copy(pin.position); group.add(halo);
+    }
+  }
+  camera.position.set(0, 34, 46); controls.target.set(0, 0, 0);
+  const done = inView.filter(p => visited.has(p.name)).length;
+  stats(which === "co"
+    ? [[done, "of 4 CO parks"], [DATA.cities.filter(c => c.lon < -101.9 && c.lon > -109.2 && c.lat > 36.85 && c.lat < 41.15).length, "CO towns"]]
+    : [[DATA.parksVisited.length, "of 63 parks"], [DATA.statesVisited.length, "of 51 states"]]);
+}
+function stats(rows) {
+  document.getElementById("stats").innerHTML =
+    rows.map(r => `<div><b>${r[0]}</b><span>${r[1]}</span></div>`).join("");
+}
+
+/* ── PICKING ─────────────────────────────────────────────────────────────── */
+const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(), tip = document.getElementById("tip");
+addEventListener("pointermove", e => {
+  mouse.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+  ray.setFromCamera(mouse, camera);
+  const hit = ray.intersectObjects(markers, false)[0];
+  if (hit) {
+    tip.innerHTML = `<b>${hit.object.userData.label}</b><br>${hit.object.userData.sub}`;
+    tip.style.left = (e.clientX + 14) + "px"; tip.style.top = (e.clientY + 12) + "px";
+    tip.style.opacity = 1; cv.style.cursor = "pointer";
+  } else { tip.style.opacity = 0; cv.style.cursor = "grab"; }
+});
+
+async function go(m) {
+  mode = m;
+  document.querySelectorAll("#modes button").forEach(b => b.classList.toggle("on", b.dataset.m === m));
+  document.getElementById("sub").textContent =
+    m === "globe" ? "world · real country outlines" : m === "us" ? "united states · 63 parks" : "colorado · 4 parks";
+  if (m === "globe") await buildGlobe(); else buildTerrain(m);
+}
+document.querySelectorAll("#modes button").forEach(b =>
+  b.addEventListener("click", () => go(b.dataset.m)));
+
+(function loop() { requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
+
+(async function init() {
+  resize();
+  DATA = await fetch("./travel.json?" + Date.now()).then(r => r.json());
+  await go("globe");
+  document.getElementById("load").remove();
+})();
+</script></body></html>
