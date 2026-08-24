@@ -1,73 +1,72 @@
-# Move out of Drive, then publish — copy-paste
+# Publish — the signing problem and the fix
 
-**Do the move first.** A `.git` directory inside Google Drive sync is a real hazard: Drive
-rewrites files mid-operation and can corrupt the object store, and two machines syncing the same
-`.git` will eventually produce a repo that fails `git fsck`. Repos belong on local disk.
+## What went wrong
 
-## 1 · Move it home
+`git commit` failed with *"incorrect passphrase supplied to decrypt private key"*. You have
+**SSH commit signing** turned on globally (`gpg.format=ssh` + `commit.gpgsign=true`), and git
+cannot decrypt `~/.ssh/id_ed25519` because the passphrase entered did not match.
+
+**Also:** `gh repo create --push` failed first because there were **no commits yet**. Commit
+before creating the repo, or create without `--push` and push after.
+
+## Fix — pick one
+
+### A · Load the key into the agent once (best)
 
 ```bash
-DRIVE="$HOME/Library/CloudStorage/GoogleDrive-vanessa.madison@datadoghq.com/My Drive/dd/travel"
-mkdir -p "$HOME/dev"
-cp -R "$DRIVE" "$HOME/dev/travel"
-cd "$HOME/dev/travel" && ls -1
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 ```
 
-Once it is confirmed there, remove the Drive copy so there is only one source of truth:
+Enter the passphrase once; macOS Keychain remembers it. If that passphrase also fails, you have
+forgotten it — go to B.
+
+### B · Skip signing for THIS repo only
 
 ```bash
-rm -rf "$HOME/Library/CloudStorage/GoogleDrive-vanessa.madison@datadoghq.com/My Drive/dd"
+cd ~/dd/travel
+git config commit.gpgsign false
 ```
 
-## 2 · Publish
+**This is legitimate here, and the distinction matters.** Signing is *required* by a server-side
+ruleset on `DataDog/ts-ai-marketplace`. `vanessamadison/travel` is your own private repo with no
+such rule. Turning it off **for this repo only** breaks no policy. Do **not** set it globally, and
+never pass `--no-gpg-sign` on marketplace work.
+
+### C · New signing key, if the passphrase is gone
 
 ```bash
-cd "$HOME/dev/travel"
+ssh-keygen -t ed25519 -C "vanessa.madison@datadoghq.com" -f ~/.ssh/id_ed25519_signing
+gh ssh-key add ~/.ssh/id_ed25519_signing.pub --type signing --title "commit signing 2026"
+git config --global user.signingkey ~/.ssh/id_ed25519_signing.pub
+```
 
-git init -b main
+## Then, in order
+
+```bash
+cd ~/dd/travel
 git add .
-git commit -S -m "travel: 3D map of parks, states and countries"
-
-# private repo + push, in one step (gh is already signed in)
+git commit -m "travel: 3D map of parks, states, countries and routes"   # -S only if signing works
 gh repo create vanessamadison/travel --private --source=. --remote=origin --push
-
-# Pages from main / root
-gh api -X POST repos/vanessamadison/travel/pages \
-  -f "source[branch]=main" -f "source[path]=/" \
-  || echo "Enable by hand: Settings -> Pages -> Deploy from a branch -> main -> / (root)"
+gh api -X POST repos/vanessamadison/travel/pages -f "source[branch]=main" -f "source[path]=/"
 ```
 
-Live at **https://vanessamadison.github.io/travel/** about a minute after the build.
+If the branch is `master` rather than `main`: `git branch -M main` before creating the repo.
 
-## If Pages will not turn on
-
-Pages on a **private** repo needs GitHub Pro or an org plan. Check what you have:
+## See it immediately, no git at all
 
 ```bash
-gh api user --jq .plan.name
+cd ~/dd/travel && python3 -m http.server 8080
 ```
 
-Three ways forward:
+Open http://localhost:8080. Do this first — know whether the map is any good before the ceremony.
 
-1. **Run it locally** — no hosting, no plan, works immediately:
-   `cd "$HOME/dev/travel" && python3 -m http.server 8080` then open `http://localhost:8080`
-2. **Make it public.** There is nothing sensitive in it by design — parks, states, countries and
-   cities only. No Datadog data, no account names, no financials, no vault paths.
-3. Put it in a Datadog-org repo if the org plan covers private Pages.
+## Pages on a private repo
 
-## Signing
+Needs GitHub Pro or an org plan. `gh api user --jq .plan.name` tells you. If not covered: run it
+locally, or make it public — parks, states, countries and routes only, nothing sensitive by design.
 
-Your marketplace work requires signed commits and you likely have `commit.gpgsign=true` set
-globally, which is why `-S` is above. If signing fails, fix the key — do not pass
-`--no-gpg-sign`.
-
-## Updating it
+## Updating later
 
 ```bash
-cd "$HOME/dev/travel"
-# edit travel.json
-git add travel.json && git commit -S -m "travel: add Zion" && git push
+cd ~/dd/travel && git add travel.json && git commit -m "travel: add <place>" && git push
 ```
-
-Or say **"add Zion to my travel map"** in the Daily OS project and the `travel` skill handles the
-edit, the route maths and the budget line.

@@ -1,227 +1,203 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>travel</title>
+<title>ATLAST — coverage</title>
 <style>
-:root{--bg:#0d0f0d;--ink:#e8ece6;--mut:#9aa396;--dim:#5c655a;--a1:#a3c46b;--a2:#8fb0c9;
- --line:rgba(232,236,230,.10);--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+:root{
+ --bg:#070907; --ink:#eef2ea; --mut:#98a294; --dim:#5b6459; --faint:#3a423a;
+ --a1:#a8cc70; --a2:#86a8c4; --gold:#e3c765; --white:#f2f6ee; --warn:#e0a06b;
+ --line:rgba(238,242,234,.10); --line2:rgba(238,242,234,.055);
+ --panel:rgba(11,14,11,.93);
+ --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,sans-serif;overflow:hidden}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:15px/1.5 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
 #c{position:fixed;inset:0;display:block}
-.ui{position:fixed;z-index:10;pointer-events:none}
-#top{top:0;left:0;right:0;padding:18px 22px;display:flex;gap:14px;align-items:baseline;
- background:linear-gradient(180deg,rgba(13,15,13,.92),transparent)}
-#top h1{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em}
-#top .s{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-#modes{position:fixed;top:16px;right:22px;z-index:11;display:flex;gap:5px;pointer-events:auto}
-#modes button{font:600 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;
- background:rgba(232,236,230,.05);color:var(--mut);border:1px solid var(--line);
- border-radius:20px;padding:7px 15px;cursor:pointer;transition:.16s}
-#modes button:hover{color:var(--ink);border-color:var(--a1)}
-#modes button.on{background:linear-gradient(120deg,rgba(163,196,107,.30),rgba(143,176,201,.22));color:var(--ink);border-color:transparent}
-#stats{position:fixed;left:22px;bottom:20px;z-index:11;display:flex;gap:22px;pointer-events:none}
+
+/* ── header ─────────────────────────────────────────────────────────── */
+#top{position:fixed;top:0;left:0;right:0;z-index:10;padding:15px 20px;display:flex;gap:10px;
+ align-items:center;background:linear-gradient(180deg,rgba(7,9,7,.92),transparent 92%);
+ pointer-events:none}
+#top h1{margin:0;font:700 16px/1 var(--mono);letter-spacing:.14em}
+#top h1 .atl{color:var(--a1)}
+#top h1 .t{color:var(--gold)}
+.pill{font-family:var(--mono);font-size:8px;letter-spacing:.15em;text-transform:uppercase;
+ border:1px solid var(--line);border-radius:20px;padding:3px 9px;color:var(--dim);white-space:nowrap}
+.pill.on{color:var(--a1);border-color:rgba(168,204,112,.3)}
+.pill.warn{color:var(--warn);border-color:rgba(224,160,107,.34)}
+#sub{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--dim);margin-left:2px}
+
+/* ── mode switch ────────────────────────────────────────────────────── */
+#modes{position:fixed;top:12px;right:20px;z-index:14;display:flex;gap:4px}
+#modes button{font:600 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;
+ background:rgba(238,242,234,.04);color:var(--mut);border:1px solid var(--line);
+ border-radius:20px;padding:7px 14px;cursor:pointer;transition:.15s}
+#modes button:hover{color:var(--ink);border-color:rgba(238,242,234,.2)}
+#modes button.on{background:rgba(168,204,112,.16);color:var(--ink);
+ border-color:rgba(168,204,112,.38);box-shadow:0 0 0 3px rgba(168,204,112,.06)}
+#modes button i{font-style:normal;opacity:.4;margin-left:6px}
+
+/* ── stats + legend ─────────────────────────────────────────────────── */
+#stats{position:fixed;left:20px;bottom:16px;z-index:11;display:flex;gap:24px;
+ pointer-events:none;align-items:flex-end}
 #stats div{font-family:var(--mono)}
-#stats b{display:block;font-size:24px;font-weight:600;color:var(--a1);letter-spacing:-.02em}
-#stats span{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-#tip{position:fixed;z-index:12;background:rgba(13,15,13,.94);border:1px solid var(--line);
- border-radius:9px;padding:8px 12px;font-size:12px;pointer-events:none;opacity:0;transition:opacity .12s;
- max-width:230px}
-#tip b{color:var(--a1)}
-#hint{position:fixed;right:22px;bottom:20px;z-index:11;font-family:var(--mono);font-size:9px;
- letter-spacing:.12em;text-transform:uppercase;color:var(--dim);pointer-events:none;text-align:right}
+#stats b{display:block;font-size:26px;font-weight:600;color:var(--a1);letter-spacing:-.03em;
+ line-height:1;font-variant-numeric:tabular-nums}
+#stats span{font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--dim)}
+#hint{position:fixed;right:20px;bottom:16px;z-index:11;font-family:var(--mono);font-size:8px;
+ line-height:1.95;letter-spacing:.11em;text-transform:uppercase;color:var(--dim);
+ text-align:right;pointer-events:none}
+
+/* ── hover callout: the only label on screen ────────────────────────── */
+#tip{position:fixed;z-index:16;background:var(--panel);border:1px solid var(--line);
+ border-left:2px solid var(--a1);border-radius:3px;padding:8px 12px;pointer-events:none;
+ opacity:0;transition:opacity .09s;max-width:290px;
+ box-shadow:0 10px 34px rgba(0,0,0,.6)}
+#tip b{display:block;font:600 13px/1.25 ui-sans-serif,system-ui,sans-serif;color:var(--ink)}
+#tip span{display:block;margin-top:3px;font:10px/1.4 var(--mono);letter-spacing:.06em;
+ color:var(--mut);text-transform:lowercase}
+
+/* ── the card ───────────────────────────────────────────────────────── */
+#cardhost{position:fixed;top:0;right:0;bottom:0;width:min(430px,100vw);z-index:15;
+ overflow-y:auto;overscroll-behavior:contain;
+ transform:translateX(102%);transition:transform .22s cubic-bezier(.32,.72,0,1);
+ background:linear-gradient(270deg,rgba(7,9,7,.97),rgba(7,9,7,.9));
+ border-left:1px solid var(--line);backdrop-filter:blur(14px)}
+#cardhost.open{transform:none}
+#cardhost::-webkit-scrollbar{width:8px}
+#cardhost::-webkit-scrollbar-thumb{background:rgba(238,242,234,.12);border-radius:8px}
+.card{padding:0 0 40px}
+.chead{position:sticky;top:0;z-index:2;display:flex;gap:13px;align-items:flex-start;
+ padding:18px 18px 15px;background:rgba(7,9,7,.97);border-bottom:1px solid var(--line)}
+.chead .ccode{font:700 15px/38px var(--mono);letter-spacing:.06em;width:44px;height:40px;
+ text-align:center;flex:none;border:1px solid var(--line);border-radius:4px;color:var(--dim)}
+.chead.on .ccode{color:var(--a1);border-color:rgba(168,204,112,.4);
+ background:rgba(168,204,112,.08)}
+.ctitle{flex:1;min-width:0}
+.ctitle h2{margin:0;font:600 20px/1.15 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.02em}
+.cstat{margin-top:4px;font:9px/1.5 var(--mono);letter-spacing:.15em;text-transform:uppercase;
+ color:var(--dim)}
+.cstat.on{color:var(--a1)}
+.cstat i{display:block;font-style:normal;color:var(--faint);letter-spacing:.1em}
+.chead .x{flex:none;background:none;border:1px solid var(--line);color:var(--mut);
+ width:28px;height:28px;border-radius:4px;font-size:16px;line-height:1;cursor:pointer}
+.chead .x:hover{color:var(--ink);border-color:rgba(238,242,234,.28)}
+
+.csave{max-height:0;overflow:hidden;transition:max-height .2s;font:9px/26px var(--mono);
+ letter-spacing:.14em;text-transform:uppercase;text-align:center}
+.csave.show{max-height:26px}
+.csave.live{background:rgba(168,204,112,.14);color:var(--a1)}
+.csave.cached{background:rgba(224,160,107,.13);color:var(--warn)}
+
+.cbody{padding:4px 18px 0}
+.csec{padding:15px 0;border-bottom:1px solid var(--line2)}
+.csech{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+.csect{font:9px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--mut)}
+.cseck{font:9px/1 var(--mono);letter-spacing:.1em;color:var(--faint)}
+.cmut{margin:6px 0 0;font:11.5px/1.55 ui-sans-serif,system-ui,sans-serif;color:var(--dim)}
+
+.bar{margin-bottom:10px}
+.bar:last-child{margin-bottom:0}
+.barh{display:flex;justify-content:space-between;align-items:baseline;
+ font:10px/1.4 var(--mono);letter-spacing:.08em;color:var(--mut);margin-bottom:5px}
+.barh b{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.barh i{font-style:normal;color:var(--faint)}
+.bart{height:3px;background:rgba(238,242,234,.07);border-radius:3px;overflow:hidden}
+.barf{height:100%;border-radius:3px;transition:width .4s}
+
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font:11px/1 ui-sans-serif,system-ui,sans-serif;padding:6px 9px;border-radius:3px;
+ border:1px solid var(--line);color:var(--mut);background:rgba(238,242,234,.02)}
+.chip i{font-style:normal;font-family:var(--mono);font-size:8.5px;letter-spacing:.09em;
+ text-transform:uppercase;color:var(--faint);margin-left:6px}
+.chip.on{color:var(--ink);border-color:rgba(168,204,112,.4);background:rgba(168,204,112,.11)}
+.chip.on i{color:var(--a1)}
+.chip.next{color:var(--ink);border-color:rgba(227,199,101,.38);background:rgba(227,199,101,.09)}
+.chip.next i{color:var(--gold)}
+
+.hp{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.hp b{font:600 14px ui-sans-serif,system-ui,sans-serif}
+.hp span{font:11px var(--mono);letter-spacing:.06em;color:var(--gold);
+ font-variant-numeric:tabular-nums}
+
+.route{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:12px}
+.route b{font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;
+ white-space:nowrap}
+.route span{font:9px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.route .dot{width:6px;height:6px;border-radius:6px;flex:none;background:var(--gold)}
+.route .dot.drive{background:#d9963f}
+.route .dot.rail{background:var(--a2)}
+
+.prow{display:flex;align-items:center;gap:10px}
+.stars{display:flex;gap:3px}
+.star{background:none;border:1px solid var(--line);color:var(--faint);width:30px;height:26px;
+ border-radius:3px;cursor:pointer;font-size:10px;transition:.12s}
+.star:hover{border-color:rgba(227,199,101,.4);color:var(--gold)}
+.star.on{color:var(--gold);border-color:rgba(227,199,101,.45);background:rgba(227,199,101,.11)}
+.phint{font:9px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
+.field{display:flex;flex-direction:column;gap:4px}
+.field span{font:8.5px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.field input,.sv-keyrow input{background:rgba(238,242,234,.04);border:1px solid var(--line);
+ border-radius:3px;color:var(--ink);padding:7px 8px;font:12px ui-sans-serif,system-ui,sans-serif}
+.field input:focus,.sv-keyrow input:focus{outline:none;border-color:rgba(168,204,112,.45)}
+
+.sv{margin-top:9px}
+.sv iframe{width:100%;height:210px;border:1px solid var(--line);border-radius:4px;display:block}
+.sv-sel{width:100%;background:rgba(238,242,234,.04);border:1px solid var(--line);
+ border-radius:3px;color:var(--ink);padding:7px 8px;font:12px ui-sans-serif,system-ui,sans-serif}
+.sv-key p{margin:0 0 8px;font-size:11.5px;line-height:1.55;color:var(--mut)}
+.sv-keyrow{display:flex;gap:6px}
+.sv-keyrow input{flex:1}
+.sv-foot{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px}
+.cbtn{background:rgba(168,204,112,.14);border:1px solid rgba(168,204,112,.36);color:var(--ink);
+ border-radius:3px;padding:7px 12px;font:600 10px var(--mono);letter-spacing:.1em;
+ text-transform:uppercase;cursor:pointer;white-space:nowrap}
+.clink{background:none;border:none;color:var(--a2);font:10px var(--mono);letter-spacing:.08em;
+ cursor:pointer;padding:0;text-decoration:underline}
+.cfoot{padding:14px 0 0;font-size:11px;color:var(--dim);display:flex;gap:6px;flex-wrap:wrap;
+ align-items:center}
+
+/* ── boot + errors ──────────────────────────────────────────────────── */
 #load{position:fixed;inset:0;display:grid;place-items:center;z-index:20;background:var(--bg);
- font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+ font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+ color:var(--dim)}
+#err{position:fixed;left:20px;top:62px;z-index:21;color:#e08b6b;font:11px var(--mono);
+ max-width:70ch;white-space:pre-wrap;pointer-events:none}
+@media (max-width:760px){
+ #cardhost{width:100vw;border-left:none}
+ #stats{gap:14px} #stats b{font-size:19px} #hint{display:none}
+}
 </style></head><body>
 <canvas id="c"></canvas>
-<div class="ui" id="top"><h1>travel</h1><span class="s" id="sub">loading</span></div>
-<div id="modes"><button data-m="globe" class="on">Globe</button><button data-m="us">USA</button><button data-m="co">Colorado</button></div>
+
+<div id="top">
+  <h1><span class="atl">ATLAS</span><span class="t">T</span></h1>
+  <span class="pill on">verified in person</span>
+  <span class="pill" id="build">at-r7.0</span>
+  <span class="pill" id="src">loading</span>
+  <span id="sub">loading</span>
+</div>
+
+<div id="modes">
+  <button data-m="co">Colorado<i>1</i></button>
+  <button data-m="us" class="on">USA<i>2</i></button>
+  <button data-m="globe">Globe<i>3</i></button>
+</div>
+
 <div id="stats"></div>
 <div id="tip"></div>
-<div id="hint">drag orbit · scroll zoom · click a marker</div>
-<div id="load">building the world</div>
+<div id="hint"></div>
+<div id="err"></div>
+<div id="cardhost"></div>
+<div id="load">at last</div>
 
 <script type="importmap">
 {"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js",
 "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
 </script>
-<script type="module">
-import * as THREE from "three";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { PARKS } from "./parks.js";
-import { elev, BOUNDS } from "./terrain.js";
-
-const cv = document.getElementById("c");
-const renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true });
-renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0d0f0d);
-scene.fog = new THREE.FogExp2(0x0d0f0d, 0.055);
-const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 2000);
-const controls = new OrbitControls(camera, cv);
-controls.enableDamping = true; controls.dampingFactor = 0.07;
-scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-const sun = new THREE.DirectionalLight(0xfff2d8, 1.25);
-sun.position.set(-40, 70, 45); scene.add(sun);
-scene.add(new THREE.HemisphereLight(0x94b8d8, 0x1a1f18, 0.5));
-
-let DATA = null, group = new THREE.Group(), markers = [], mode = "globe";
-scene.add(group);
-
-function clear() {
-  while (group.children.length) {
-    const o = group.children.pop();
-    o.geometry?.dispose(); o.material?.dispose?.();
-  }
-  markers = [];
-}
-function resize() {
-  const w = innerWidth, h = innerHeight;
-  renderer.setSize(w, h); camera.aspect = w / h; camera.updateProjectionMatrix();
-}
-addEventListener("resize", resize);
-
-/* ── GLOBE ───────────────────────────────────────────────────────────────── */
-async function buildGlobe() {
-  clear();
-  const R = 10;
-  const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(R, 96, 96),
-    new THREE.MeshStandardMaterial({ color: 0x11242e, roughness: .85, metalness: .1 }));
-  group.add(sphere);
-  group.add(new THREE.Mesh(new THREE.SphereGeometry(R * 1.02, 64, 64),
-    new THREE.MeshBasicMaterial({ color: 0x2f6d8a, transparent: true, opacity: .07 })));
-
-  // Real country outlines. Works here because GitHub Pages allows fetch — the reason this
-  // repo exists instead of living inside the Cowork artifact.
-  const topo = await fetch("https://unpkg.com/world-atlas@2/countries-110m.json").then(r => r.json());
-  const { objects, arcs, transform } = topo;
-  const [sx, sy] = transform.scale, [tx, ty] = transform.translate;
-  const decode = a => { let x = 0, y = 0; return a.map(d => { x += d[0]; y += d[1]; return [x * sx + tx, y * sy + ty]; }); };
-  const ring = i => i >= 0 ? decode(arcs[i]) : decode(arcs[~i]).slice().reverse();
-  const ll2v = (lon, lat, r) => {
-    const p = (90 - lat) * Math.PI / 180, t = (lon + 180) * Math.PI / 180;
-    return new THREE.Vector3(-r * Math.sin(p) * Math.cos(t), r * Math.cos(p), r * Math.sin(p) * Math.sin(t));
-  };
-  const visited = new Set(DATA.countriesVisited);
-  const nameOf = g => g.properties?.name || "";
-  for (const geo of objects.countries.geometries) {
-    const on = visited.has(nameOf(geo));
-    const polys = geo.type === "Polygon" ? [geo.arcs] : geo.arcs;
-    for (const poly of polys) for (const lr of poly) {
-      const pts = [];
-      for (const ai of lr) for (const c of ring(ai)) pts.push(ll2v(c[0], c[1], R * 1.004));
-      if (pts.length < 2) continue;
-      group.add(new THREE.Line(
-        new THREE.BufferGeometry().setFromPoints(pts),
-        new THREE.LineBasicMaterial({
-          color: on ? 0xa3c46b : 0x3c4a3a,
-          transparent: true, opacity: on ? .95 : .5 })));
-    }
-  }
-  for (const c of DATA.cities) {
-    const m = new THREE.Mesh(new THREE.SphereGeometry(.075, 12, 12),
-      new THREE.MeshBasicMaterial({ color: 0xa3c46b }));
-    m.position.copy(ll2v(c.lon, c.lat, R * 1.015));
-    m.userData = { label: c.name, sub: "city" };
-    group.add(m); markers.push(m);
-  }
-  camera.position.set(14, 9, 20); controls.target.set(0, 0, 0);
-  stats([[DATA.countriesVisited.length, "countries"], [DATA.cities.length, "cities"], [4, "of 7 continents"]]);
-}
-
-/* ── TERRAIN ─────────────────────────────────────────────────────────────── */
-function buildTerrain(which) {
-  clear();
-  const b = BOUNDS[which], N = which === "co" ? 200 : 260, M = which === "co" ? 150 : 150;
-  const kx = Math.cos(((b[0] + b[1]) / 2) * Math.PI / 180);
-  const spanX = (b[3] - b[2]) * kx, spanY = (b[1] - b[0]);
-  const S = 60 / Math.max(spanX, spanY);
-  const vert = which === "co" ? 0.00055 : 0.00042;
-  const geo = new THREE.PlaneGeometry(spanX * S, spanY * S, N, M);
-  const pos = geo.attributes.position;
-  const col = [];
-  const hmin = which === "co" ? 3300 : 0, hmax = which === "co" ? 14440 : 14505;
-  for (let i = 0; i < pos.count; i++) {
-    const px = pos.getX(i), py = pos.getY(i);
-    const lon = b[2] + ((px / (spanX * S)) + .5) * (b[3] - b[2]);
-    const lat = b[0] + ((py / (spanY * S)) + .5) * (b[1] - b[0]);
-    const h = elev(lat, lon, which);
-    pos.setZ(i, h * vert * S * 10);
-    const t = Math.max(0, Math.min(1, (h - hmin) / (hmax - hmin)));
-    // green valleys → tan mid → grey rock → white above treeline
-    const c = t < .30 ? [.18 + t * .3, .30 + t * .4, .16 + t * .2]
-            : t < .58 ? [.42 + t * .3, .44 + t * .22, .26]
-            : t < .80 ? [.52, .50, .46]
-                      : [.80 + t * .18, .82 + t * .16, .84 + t * .14];
-    col.push(c[0], c[1], c[2]);
-  }
-  geo.setAttribute("color", new THREE.Float32BufferAttribute(col, 3));
-  geo.computeVertexNormals();
-  const mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({
-    vertexColors: true, roughness: .95, metalness: .02, flatShading: false }));
-  mesh.rotation.x = -Math.PI / 2;
-  group.add(mesh);
-
-  const visited = new Set(DATA.parksVisited);
-  const inView = PARKS.filter(p => p.lat >= b[0] && p.lat <= b[1] && p.lon >= b[2] && p.lon <= b[3]);
-  for (const p of inView) {
-    const on = visited.has(p.name);
-    const x = ((p.lon - (b[2] + b[3]) / 2) * kx) * S;
-    const z = -((p.lat - (b[0] + b[1]) / 2)) * S;
-    const y = elev(p.lat, p.lon, which) * vert * S * 10;
-    const pin = new THREE.Mesh(
-      new THREE.ConeGeometry(on ? .34 : .2, on ? 1.5 : .9, 10),
-      new THREE.MeshBasicMaterial({ color: on ? 0xa3c46b : 0x6a7566,
-        transparent: !on, opacity: on ? 1 : .55 }));
-    pin.position.set(x, y + (on ? .9 : .55), z);
-    pin.userData = { label: p.name, sub: p.state + " · " + Math.round(elev(p.lat, p.lon, which)) + " ft" };
-    group.add(pin); markers.push(pin);
-    if (on) {
-      const halo = new THREE.Mesh(new THREE.SphereGeometry(.55, 14, 14),
-        new THREE.MeshBasicMaterial({ color: 0xa3c46b, transparent: true, opacity: .16 }));
-      halo.position.copy(pin.position); group.add(halo);
-    }
-  }
-  camera.position.set(0, 34, 46); controls.target.set(0, 0, 0);
-  const done = inView.filter(p => visited.has(p.name)).length;
-  stats(which === "co"
-    ? [[done, "of 4 CO parks"], [DATA.cities.filter(c => c.lon < -101.9 && c.lon > -109.2 && c.lat > 36.85 && c.lat < 41.15).length, "CO towns"]]
-    : [[DATA.parksVisited.length, "of 63 parks"], [DATA.statesVisited.length, "of 51 states"]]);
-}
-function stats(rows) {
-  document.getElementById("stats").innerHTML =
-    rows.map(r => `<div><b>${r[0]}</b><span>${r[1]}</span></div>`).join("");
-}
-
-/* ── PICKING ─────────────────────────────────────────────────────────────── */
-const ray = new THREE.Raycaster(), mouse = new THREE.Vector2(), tip = document.getElementById("tip");
-addEventListener("pointermove", e => {
-  mouse.set((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
-  ray.setFromCamera(mouse, camera);
-  const hit = ray.intersectObjects(markers, false)[0];
-  if (hit) {
-    tip.innerHTML = `<b>${hit.object.userData.label}</b><br>${hit.object.userData.sub}`;
-    tip.style.left = (e.clientX + 14) + "px"; tip.style.top = (e.clientY + 12) + "px";
-    tip.style.opacity = 1; cv.style.cursor = "pointer";
-  } else { tip.style.opacity = 0; cv.style.cursor = "grab"; }
-});
-
-async function go(m) {
-  mode = m;
-  document.querySelectorAll("#modes button").forEach(b => b.classList.toggle("on", b.dataset.m === m));
-  document.getElementById("sub").textContent =
-    m === "globe" ? "world · real country outlines" : m === "us" ? "united states · 63 parks" : "colorado · 4 parks";
-  if (m === "globe") await buildGlobe(); else buildTerrain(m);
-}
-document.querySelectorAll("#modes button").forEach(b =>
-  b.addEventListener("click", () => go(b.dataset.m)));
-
-(function loop() { requestAnimationFrame(loop); controls.update(); renderer.render(scene, camera); })();
-
-(async function init() {
-  resize();
-  DATA = await fetch("./travel.json?" + Date.now()).then(r => r.json());
-  await go("globe");
-  document.getElementById("load").remove();
-})();
-</script></body></html>
+<script type="module" src="./app.js?v=7"></script>
+</body></html>

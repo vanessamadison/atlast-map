@@ -1,41 +1,2252 @@
 {
   "_comment": "The only file you edit. Add a name to a list, commit, and GitHub Pages redeploys in about a minute.",
-  "updated": "2026-08-20",
-  "parksVisited": ["Rocky Mountain", "Mesa Verde", "Yellowstone", "Great Sand Dunes"],
-  "statesVisited": ["WA","OR","CA","NV","UT","CO","WY","MT","NM","SD","TN","FL","NY","MI","IL","DC"],
-  "countriesVisited": ["United States","Canada","Mexico","Peru","Japan","France","Belgium","Netherlands"],
+  "updated": "2026-08-24",
+  "parksVisited": [
+    "Rocky Mountain",
+    "Mesa Verde",
+    "Yellowstone",
+    "Great Sand Dunes",
+    "Arches",
+    "Canyonlands"
+  ],
+  "statesVisited": [
+    "WA",
+    "OR",
+    "CA",
+    "NV",
+    "UT",
+    "CO",
+    "WY",
+    "MT",
+    "NM",
+    "SD",
+    "TN",
+    "FL",
+    "NY",
+    "MI",
+    "IL",
+    "DC"
+  ],
+  "countriesVisited": [
+    "United States",
+    "Canada",
+    "Mexico",
+    "Peru",
+    "Japan",
+    "France",
+    "Belgium",
+    "Netherlands"
+  ],
   "cities": [
-    {"name":"Seattle","lat":47.61,"lon":-122.33},
-    {"name":"Portland","lat":45.52,"lon":-122.68},
-    {"name":"San Francisco","lat":37.77,"lon":-122.42},
-    {"name":"Los Angeles","lat":34.05,"lon":-118.24},
-    {"name":"San Diego","lat":32.72,"lon":-117.16},
-    {"name":"Las Vegas","lat":36.17,"lon":-115.14},
-    {"name":"Moab","lat":38.57,"lon":-109.55},
-    {"name":"Denver","lat":39.74,"lon":-104.99},
-    {"name":"Pueblo","lat":38.25,"lon":-104.61},
-    {"name":"Fort Collins","lat":40.59,"lon":-105.08},
-    {"name":"Colorado Springs","lat":38.83,"lon":-104.82},
-    {"name":"Taos","lat":36.41,"lon":-105.57},
-    {"name":"Cheyenne","lat":41.14,"lon":-104.82},
-    {"name":"Nashville","lat":36.16,"lon":-86.78},
-    {"name":"Miami","lat":25.76,"lon":-80.19},
-    {"name":"Key West","lat":24.56,"lon":-81.78},
-    {"name":"New York City","lat":40.71,"lon":-74.01},
-    {"name":"Detroit","lat":42.33,"lon":-83.05},
-    {"name":"Grand Rapids","lat":42.96,"lon":-85.67},
-    {"name":"Washington DC","lat":38.91,"lon":-77.04},
-    {"name":"Chicago","lat":41.88,"lon":-87.63},
-    {"name":"Vancouver","lat":49.28,"lon":-123.12},
-    {"name":"Victoria","lat":48.43,"lon":-123.37},
-    {"name":"Cancun","lat":21.16,"lon":-86.85},
-    {"name":"Tulum","lat":20.21,"lon":-87.47},
-    {"name":"Lima","lat":-12.05,"lon":-77.04},
-    {"name":"Cusco","lat":-13.53,"lon":-71.97},
-    {"name":"Tokyo","lat":35.68,"lon":139.69},
-    {"name":"Kyoto","lat":35.01,"lon":135.77},
-    {"name":"Amsterdam","lat":52.37,"lon":4.90},
-    {"name":"Brussels","lat":50.85,"lon":4.35},
-    {"name":"Paris","lat":48.86,"lon":2.35}
-  ]
+    {
+      "name": "Highlands Ranch",
+      "lat": 39.55,
+      "lon": -104.97
+    },
+    {
+      "name": "Seattle",
+      "lat": 47.61,
+      "lon": -122.33
+    },
+    {
+      "name": "Portland",
+      "lat": 45.52,
+      "lon": -122.68
+    },
+    {
+      "name": "San Francisco",
+      "lat": 37.77,
+      "lon": -122.42
+    },
+    {
+      "name": "Los Angeles",
+      "lat": 34.05,
+      "lon": -118.24
+    },
+    {
+      "name": "San Diego",
+      "lat": 32.72,
+      "lon": -117.16
+    },
+    {
+      "name": "Las Vegas",
+      "lat": 36.17,
+      "lon": -115.14
+    },
+    {
+      "name": "Moab",
+      "lat": 38.57,
+      "lon": -109.55
+    },
+    {
+      "name": "Denver",
+      "lat": 39.74,
+      "lon": -104.99
+    },
+    {
+      "name": "Pueblo",
+      "lat": 38.25,
+      "lon": -104.61
+    },
+    {
+      "name": "Fort Collins",
+      "lat": 40.59,
+      "lon": -105.08
+    },
+    {
+      "name": "Colorado Springs",
+      "lat": 38.83,
+      "lon": -104.82
+    },
+    {
+      "name": "Taos",
+      "lat": 36.41,
+      "lon": -105.57
+    },
+    {
+      "name": "Cheyenne",
+      "lat": 41.14,
+      "lon": -104.82
+    },
+    {
+      "name": "Nashville",
+      "lat": 36.16,
+      "lon": -86.78
+    },
+    {
+      "name": "Miami",
+      "lat": 25.76,
+      "lon": -80.19
+    },
+    {
+      "name": "Key West",
+      "lat": 24.56,
+      "lon": -81.78
+    },
+    {
+      "name": "New York City",
+      "lat": 40.71,
+      "lon": -74.01
+    },
+    {
+      "name": "Detroit",
+      "lat": 42.33,
+      "lon": -83.05
+    },
+    {
+      "name": "Grand Rapids",
+      "lat": 42.96,
+      "lon": -85.67
+    },
+    {
+      "name": "Washington DC",
+      "lat": 38.91,
+      "lon": -77.04
+    },
+    {
+      "name": "Chicago",
+      "lat": 41.88,
+      "lon": -87.63
+    },
+    {
+      "name": "Vancouver",
+      "lat": 49.28,
+      "lon": -123.12
+    },
+    {
+      "name": "Victoria",
+      "lat": 48.43,
+      "lon": -123.37
+    },
+    {
+      "name": "Cancun",
+      "lat": 21.16,
+      "lon": -86.85
+    },
+    {
+      "name": "Tulum",
+      "lat": 20.21,
+      "lon": -87.47
+    },
+    {
+      "name": "Lima",
+      "lat": -12.05,
+      "lon": -77.04
+    },
+    {
+      "name": "Cusco",
+      "lat": -13.53,
+      "lon": -71.97
+    },
+    {
+      "name": "Tokyo",
+      "lat": 35.68,
+      "lon": 139.69
+    },
+    {
+      "name": "Kyoto",
+      "lat": 35.01,
+      "lon": 135.77
+    },
+    {
+      "name": "Amsterdam",
+      "lat": 52.37,
+      "lon": 4.9
+    },
+    {
+      "name": "Brussels",
+      "lat": 50.85,
+      "lon": 4.35
+    },
+    {
+      "name": "Paris",
+      "lat": 48.86,
+      "lon": 2.35
+    }
+  ],
+  "routes": [
+    {
+      "name": "Highlands Ranch → Moab · Arches + Canyonlands",
+      "mode": "drive",
+      "year": "",
+      "pts": [
+        [
+          39.55,
+          -104.97
+        ],
+        [
+          39.74,
+          -104.99
+        ],
+        [
+          39.73,
+          -105.51
+        ],
+        [
+          39.64,
+          -106.07
+        ],
+        [
+          39.55,
+          -106.83
+        ],
+        [
+          39.55,
+          -107.33
+        ],
+        [
+          39.09,
+          -108.55
+        ],
+        [
+          38.9,
+          -109.15
+        ],
+        [
+          38.57,
+          -109.55
+        ],
+        [
+          38.73,
+          -109.59
+        ],
+        [
+          38.2,
+          -109.93
+        ]
+      ]
+    },
+    {
+      "name": "Denver → Great Sand Dunes",
+      "mode": "drive",
+      "year": "",
+      "pts": [
+        [
+          39.55,
+          -104.97
+        ],
+        [
+          39.42,
+          -105.35
+        ],
+        [
+          38.84,
+          -106.13
+        ],
+        [
+          38.53,
+          -106.0
+        ],
+        [
+          37.79,
+          -105.59
+        ]
+      ]
+    },
+    {
+      "name": "Denver → Mesa Verde",
+      "mode": "drive",
+      "year": "",
+      "pts": [
+        [
+          39.55,
+          -104.97
+        ],
+        [
+          39.42,
+          -105.35
+        ],
+        [
+          38.53,
+          -106.0
+        ],
+        [
+          37.47,
+          -105.87
+        ],
+        [
+          37.28,
+          -107.88
+        ],
+        [
+          37.23,
+          -108.46
+        ]
+      ]
+    },
+    {
+      "name": "Denver → Yellowstone",
+      "mode": "drive",
+      "year": "",
+      "pts": [
+        [
+          39.74,
+          -104.99
+        ],
+        [
+          41.14,
+          -104.82
+        ],
+        [
+          42.85,
+          -106.31
+        ],
+        [
+          43.03,
+          -108.38
+        ],
+        [
+          43.48,
+          -109.72
+        ],
+        [
+          43.79,
+          -110.68
+        ],
+        [
+          44.6,
+          -110.5
+        ]
+      ]
+    },
+    {
+      "name": "Coast Starlight · Victoria → San Diego",
+      "mode": "rail",
+      "year": "Jan 2026",
+      "pts": [
+        [
+          48.43,
+          -123.37
+        ],
+        [
+          49.28,
+          -123.12
+        ],
+        [
+          47.61,
+          -122.33
+        ],
+        [
+          45.52,
+          -122.68
+        ],
+        [
+          40.58,
+          -122.39
+        ],
+        [
+          37.77,
+          -122.42
+        ],
+        [
+          35.28,
+          -120.66
+        ],
+        [
+          34.05,
+          -118.24
+        ],
+        [
+          32.72,
+          -117.16
+        ]
+      ]
+    }
+  ],
+  "suggestions": [
+    {
+      "park": "Black Canyon",
+      "why": "the last one in Colorado · 4 hrs from Highlands Ranch"
+    },
+    {
+      "park": "Capitol Reef",
+      "why": "3 hrs past Moab · turns any Utah trip into three parks"
+    },
+    {
+      "park": "Bryce Canyon",
+      "why": "completes the Utah 5 with Zion"
+    },
+    {
+      "park": "Zion",
+      "why": "completes the Utah 5"
+    },
+    {
+      "park": "Grand Teton",
+      "why": "you drove past it to Yellowstone"
+    },
+    {
+      "park": "Petrified Forest",
+      "why": "on the I-40 line if you go south"
+    },
+    {
+      "park": "Badlands",
+      "why": "pairs with Wind Cave · you have been to SD already"
+    },
+    {
+      "park": "Wind Cave",
+      "why": "pairs with Badlands"
+    }
+  ],
+  "stateNotes": {},
+  "_stateNotesNote": "Written by the state card. priority 0-5, first visited, and a note. Editable in the map when serve.sh is running.",
+  "coTowns": [
+    {
+      "n": 1,
+      "name": "Denver",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.74,
+      "lon": -104.99,
+      "been": true
+    },
+    {
+      "n": 2,
+      "name": "Highlands Ranch",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.55,
+      "lon": -104.97,
+      "been": true
+    },
+    {
+      "n": 3,
+      "name": "Littleton",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.61,
+      "lon": -105.02,
+      "been": true
+    },
+    {
+      "n": 4,
+      "name": "Centennial",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.58,
+      "lon": -104.88,
+      "been": true
+    },
+    {
+      "n": 5,
+      "name": "Englewood",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.65,
+      "lon": -104.99,
+      "been": true
+    },
+    {
+      "n": 6,
+      "name": "Greenwood Village",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.62,
+      "lon": -104.95,
+      "been": true
+    },
+    {
+      "n": 7,
+      "name": "Lone Tree",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.55,
+      "lon": -104.89,
+      "been": true
+    },
+    {
+      "n": 8,
+      "name": "Parker",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.52,
+      "lon": -104.76,
+      "been": true
+    },
+    {
+      "n": 9,
+      "name": "Castle Rock",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.37,
+      "lon": -104.86,
+      "been": true
+    },
+    {
+      "n": 10,
+      "name": "Aurora",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.73,
+      "lon": -104.83,
+      "been": true
+    },
+    {
+      "n": 11,
+      "name": "Lakewood",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.7,
+      "lon": -105.08,
+      "been": true
+    },
+    {
+      "n": 12,
+      "name": "Golden",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.76,
+      "lon": -105.22,
+      "been": true
+    },
+    {
+      "n": 13,
+      "name": "Arvada",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.8,
+      "lon": -105.09,
+      "been": true
+    },
+    {
+      "n": 14,
+      "name": "Wheat Ridge",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.77,
+      "lon": -105.08,
+      "been": true
+    },
+    {
+      "n": 15,
+      "name": "Westminster",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.84,
+      "lon": -105.04,
+      "been": true
+    },
+    {
+      "n": 16,
+      "name": "Thornton",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.87,
+      "lon": -104.97,
+      "been": true
+    },
+    {
+      "n": 17,
+      "name": "Broomfield",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.92,
+      "lon": -105.09,
+      "been": true
+    },
+    {
+      "n": 18,
+      "name": "Morrison",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.65,
+      "lon": -105.19,
+      "been": true
+    },
+    {
+      "n": 19,
+      "name": "Evergreen",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.63,
+      "lon": -105.32,
+      "been": true
+    },
+    {
+      "n": 20,
+      "name": "Conifer",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.52,
+      "lon": -105.31,
+      "been": true
+    },
+    {
+      "n": 21,
+      "name": "Sedalia",
+      "region": "DENVER METRO & FRONT RANGE SUBURBS",
+      "lat": 39.44,
+      "lon": -104.96,
+      "been": true
+    },
+    {
+      "n": 22,
+      "name": "Boulder",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.01,
+      "lon": -105.27,
+      "been": true
+    },
+    {
+      "n": 23,
+      "name": "Louisville",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 39.98,
+      "lon": -105.13,
+      "been": true
+    },
+    {
+      "n": 24,
+      "name": "Lafayette",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 39.99,
+      "lon": -105.09,
+      "been": true
+    },
+    {
+      "n": 25,
+      "name": "Erie",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.05,
+      "lon": -105.05,
+      "been": true
+    },
+    {
+      "n": 26,
+      "name": "Longmont",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.17,
+      "lon": -105.1,
+      "been": true
+    },
+    {
+      "n": 27,
+      "name": "Loveland",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.4,
+      "lon": -105.07,
+      "been": true
+    },
+    {
+      "n": 28,
+      "name": "Fort Collins",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.59,
+      "lon": -105.08,
+      "been": true
+    },
+    {
+      "n": 29,
+      "name": "Windsor",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.48,
+      "lon": -104.9,
+      "been": true
+    },
+    {
+      "n": 30,
+      "name": "Greeley",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.42,
+      "lon": -104.71,
+      "been": true
+    },
+    {
+      "n": 31,
+      "name": "Wellington",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.7,
+      "lon": -105.0,
+      "been": true
+    },
+    {
+      "n": 32,
+      "name": "Estes Park",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.38,
+      "lon": -105.52,
+      "been": true
+    },
+    {
+      "n": 33,
+      "name": "Nederland",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 39.96,
+      "lon": -105.51,
+      "been": true
+    },
+    {
+      "n": 34,
+      "name": "Lyons",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.22,
+      "lon": -105.27,
+      "been": true
+    },
+    {
+      "n": 35,
+      "name": "Berthoud",
+      "region": "BOULDER & NORTHERN FRONT RANGE",
+      "lat": 40.31,
+      "lon": -105.08,
+      "been": true
+    },
+    {
+      "n": 36,
+      "name": "Idaho Springs",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.74,
+      "lon": -105.51,
+      "been": true
+    },
+    {
+      "n": 37,
+      "name": "Georgetown",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.71,
+      "lon": -105.7,
+      "been": true
+    },
+    {
+      "n": 38,
+      "name": "Silver Plume",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.69,
+      "lon": -105.73,
+      "been": true
+    },
+    {
+      "n": 39,
+      "name": "Empire",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.76,
+      "lon": -105.68,
+      "been": false
+    },
+    {
+      "n": 40,
+      "name": "Winter Park",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.89,
+      "lon": -105.77,
+      "been": true
+    },
+    {
+      "n": 41,
+      "name": "Fraser",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.94,
+      "lon": -105.82,
+      "been": false
+    },
+    {
+      "n": 42,
+      "name": "Granby",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 40.09,
+      "lon": -105.94,
+      "been": false
+    },
+    {
+      "n": 43,
+      "name": "Silverthorne",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.63,
+      "lon": -106.07,
+      "been": true
+    },
+    {
+      "n": 44,
+      "name": "Dillon",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.63,
+      "lon": -106.04,
+      "been": false
+    },
+    {
+      "n": 45,
+      "name": "Frisco",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.57,
+      "lon": -106.1,
+      "been": true
+    },
+    {
+      "n": 46,
+      "name": "Breckenridge",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.48,
+      "lon": -106.04,
+      "been": true
+    },
+    {
+      "n": 47,
+      "name": "Keystone",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.61,
+      "lon": -105.94,
+      "been": true
+    },
+    {
+      "n": 48,
+      "name": "Vail",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.64,
+      "lon": -106.37,
+      "been": true
+    },
+    {
+      "n": 49,
+      "name": "Avon",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.63,
+      "lon": -106.52,
+      "been": false
+    },
+    {
+      "n": 50,
+      "name": "Edwards",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.64,
+      "lon": -106.6,
+      "been": false
+    },
+    {
+      "n": 51,
+      "name": "Eagle",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.66,
+      "lon": -106.83,
+      "been": false
+    },
+    {
+      "n": 52,
+      "name": "Gypsum",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.65,
+      "lon": -106.95,
+      "been": false
+    },
+    {
+      "n": 53,
+      "name": "Glenwood Springs",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.55,
+      "lon": -107.32,
+      "been": true
+    },
+    {
+      "n": 54,
+      "name": "Carbondale",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.4,
+      "lon": -107.21,
+      "been": false
+    },
+    {
+      "n": 55,
+      "name": "Rifle",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.53,
+      "lon": -107.78,
+      "been": false
+    },
+    {
+      "n": 56,
+      "name": "Parachute",
+      "region": "I-70 MOUNTAIN CORRIDOR",
+      "lat": 39.45,
+      "lon": -108.05,
+      "been": false
+    },
+    {
+      "n": 57,
+      "name": "Aspen",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 39.19,
+      "lon": -106.82,
+      "been": false
+    },
+    {
+      "n": 58,
+      "name": "Snowmass Village",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 39.21,
+      "lon": -106.94,
+      "been": false
+    },
+    {
+      "n": 59,
+      "name": "Basalt",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 39.37,
+      "lon": -107.03,
+      "been": false
+    },
+    {
+      "n": 60,
+      "name": "Leadville",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 39.25,
+      "lon": -106.29,
+      "been": true
+    },
+    {
+      "n": 61,
+      "name": "Fairplay",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 39.22,
+      "lon": -106.0,
+      "been": true
+    },
+    {
+      "n": 62,
+      "name": "Alma",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 39.28,
+      "lon": -106.06,
+      "been": false
+    },
+    {
+      "n": 63,
+      "name": "Buena Vista",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 38.84,
+      "lon": -106.13,
+      "been": true
+    },
+    {
+      "n": 64,
+      "name": "Salida",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 38.53,
+      "lon": -106.0,
+      "been": true
+    },
+    {
+      "n": 65,
+      "name": "Poncha Springs",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 38.51,
+      "lon": -106.08,
+      "been": false
+    },
+    {
+      "n": 66,
+      "name": "Crested Butte",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 38.87,
+      "lon": -106.99,
+      "been": false
+    },
+    {
+      "n": 67,
+      "name": "Gunnison",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 38.55,
+      "lon": -106.93,
+      "been": false
+    },
+    {
+      "n": 68,
+      "name": "Lake City",
+      "region": "ASPEN, LEADVILLE & THE HIGH CENTRAL",
+      "lat": 38.03,
+      "lon": -107.32,
+      "been": false
+    },
+    {
+      "n": 69,
+      "name": "Grand Junction",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 39.06,
+      "lon": -108.55,
+      "been": true
+    },
+    {
+      "n": 70,
+      "name": "Fruita",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 39.16,
+      "lon": -108.73,
+      "been": false
+    },
+    {
+      "n": 71,
+      "name": "Palisade",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 39.11,
+      "lon": -108.35,
+      "been": true
+    },
+    {
+      "n": 72,
+      "name": "Delta",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 38.74,
+      "lon": -108.07,
+      "been": false
+    },
+    {
+      "n": 73,
+      "name": "Montrose",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 38.48,
+      "lon": -107.88,
+      "been": false
+    },
+    {
+      "n": 74,
+      "name": "Olathe",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 38.6,
+      "lon": -107.99,
+      "been": false
+    },
+    {
+      "n": 75,
+      "name": "Paonia",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 38.87,
+      "lon": -107.59,
+      "been": false
+    },
+    {
+      "n": 76,
+      "name": "Hotchkiss",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 38.8,
+      "lon": -107.72,
+      "been": false
+    },
+    {
+      "n": 77,
+      "name": "Cedaredge",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 38.9,
+      "lon": -107.93,
+      "been": false
+    },
+    {
+      "n": 78,
+      "name": "Meeker",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 40.04,
+      "lon": -107.91,
+      "been": false
+    },
+    {
+      "n": 79,
+      "name": "Rangely",
+      "region": "WESTERN SLOPE & GRAND VALLEY",
+      "lat": 40.09,
+      "lon": -108.8,
+      "been": false
+    },
+    {
+      "n": 80,
+      "name": "Ouray",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 38.02,
+      "lon": -107.67,
+      "been": false
+    },
+    {
+      "n": 81,
+      "name": "Ridgway",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 38.15,
+      "lon": -107.76,
+      "been": false
+    },
+    {
+      "n": 82,
+      "name": "Telluride",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 37.94,
+      "lon": -107.81,
+      "been": false
+    },
+    {
+      "n": 83,
+      "name": "Silverton",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 37.81,
+      "lon": -107.66,
+      "been": true
+    },
+    {
+      "n": 84,
+      "name": "Durango",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 37.27,
+      "lon": -107.88,
+      "been": false
+    },
+    {
+      "n": 85,
+      "name": "Bayfield",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 37.23,
+      "lon": -107.6,
+      "been": false
+    },
+    {
+      "n": 86,
+      "name": "Pagosa Springs",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 37.27,
+      "lon": -107.01,
+      "been": false
+    },
+    {
+      "n": 87,
+      "name": "Cortez",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 37.35,
+      "lon": -108.59,
+      "been": false
+    },
+    {
+      "n": 88,
+      "name": "Mancos",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 37.35,
+      "lon": -108.29,
+      "been": false
+    },
+    {
+      "n": 89,
+      "name": "Dolores",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 37.47,
+      "lon": -108.5,
+      "been": false
+    },
+    {
+      "n": 90,
+      "name": "Norwood",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 38.13,
+      "lon": -108.29,
+      "been": false
+    },
+    {
+      "n": 91,
+      "name": "Naturita",
+      "region": "SAN JUANS & SOUTHWEST",
+      "lat": 38.22,
+      "lon": -108.57,
+      "been": false
+    },
+    {
+      "n": 92,
+      "name": "Alamosa",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.47,
+      "lon": -105.87,
+      "been": false
+    },
+    {
+      "n": 93,
+      "name": "Monte Vista",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.58,
+      "lon": -106.15,
+      "been": false
+    },
+    {
+      "n": 94,
+      "name": "Del Norte",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.68,
+      "lon": -106.35,
+      "been": false
+    },
+    {
+      "n": 95,
+      "name": "South Fork",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.67,
+      "lon": -106.64,
+      "been": false
+    },
+    {
+      "n": 96,
+      "name": "Creede",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.85,
+      "lon": -106.93,
+      "been": false
+    },
+    {
+      "n": 97,
+      "name": "Fort Garland",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.43,
+      "lon": -105.43,
+      "been": false
+    },
+    {
+      "n": 98,
+      "name": "Blanca",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.43,
+      "lon": -105.51,
+      "been": false
+    },
+    {
+      "n": 99,
+      "name": "San Luis",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.2,
+      "lon": -105.42,
+      "been": false
+    },
+    {
+      "n": 100,
+      "name": "Antonito",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.08,
+      "lon": -106.01,
+      "been": false
+    },
+    {
+      "n": 101,
+      "name": "La Veta",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.51,
+      "lon": -105.01,
+      "been": false
+    },
+    {
+      "n": 102,
+      "name": "Walsenburg",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.62,
+      "lon": -104.78,
+      "been": false
+    },
+    {
+      "n": 103,
+      "name": "Trinidad",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.17,
+      "lon": -104.51,
+      "been": false
+    },
+    {
+      "n": 104,
+      "name": "Aguilar",
+      "region": "SAN LUIS VALLEY & SOUTH-CENTRAL",
+      "lat": 37.4,
+      "lon": -104.65,
+      "been": false
+    },
+    {
+      "n": 105,
+      "name": "Colorado Springs",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 38.83,
+      "lon": -104.82,
+      "been": true
+    },
+    {
+      "n": 106,
+      "name": "Manitou Springs",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 38.86,
+      "lon": -104.92,
+      "been": false
+    },
+    {
+      "n": 107,
+      "name": "Monument",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 39.09,
+      "lon": -104.87,
+      "been": false
+    },
+    {
+      "n": 108,
+      "name": "Woodland Park",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 39.0,
+      "lon": -105.06,
+      "been": false
+    },
+    {
+      "n": 109,
+      "name": "Cripple Creek",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 38.75,
+      "lon": -105.18,
+      "been": false
+    },
+    {
+      "n": 110,
+      "name": "Victor",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 38.71,
+      "lon": -105.14,
+      "been": false
+    },
+    {
+      "n": 111,
+      "name": "Fountain",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 38.68,
+      "lon": -104.7,
+      "been": false
+    },
+    {
+      "n": 112,
+      "name": "Cañon City",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 38.44,
+      "lon": -105.24,
+      "been": false
+    },
+    {
+      "n": 113,
+      "name": "Florence",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 38.39,
+      "lon": -105.12,
+      "been": false
+    },
+    {
+      "n": 114,
+      "name": "Pueblo",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 38.25,
+      "lon": -104.61,
+      "been": true
+    },
+    {
+      "n": 115,
+      "name": "Pueblo West",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 38.35,
+      "lon": -104.72,
+      "been": false
+    },
+    {
+      "n": 116,
+      "name": "Bailey",
+      "region": "PIKES PEAK & SOUTHERN FRONT RANGE",
+      "lat": 39.41,
+      "lon": -105.48,
+      "been": false
+    },
+    {
+      "n": 117,
+      "name": "Steamboat Springs",
+      "region": "NORTHWEST & STEAMBOAT",
+      "lat": 40.48,
+      "lon": -106.83,
+      "been": false
+    },
+    {
+      "n": 118,
+      "name": "Hayden",
+      "region": "NORTHWEST & STEAMBOAT",
+      "lat": 40.49,
+      "lon": -107.26,
+      "been": false
+    },
+    {
+      "n": 119,
+      "name": "Oak Creek",
+      "region": "NORTHWEST & STEAMBOAT",
+      "lat": 40.28,
+      "lon": -106.95,
+      "been": false
+    },
+    {
+      "n": 120,
+      "name": "Yampa",
+      "region": "NORTHWEST & STEAMBOAT",
+      "lat": 40.15,
+      "lon": -106.91,
+      "been": false
+    },
+    {
+      "n": 121,
+      "name": "Craig",
+      "region": "NORTHWEST & STEAMBOAT",
+      "lat": 40.52,
+      "lon": -107.55,
+      "been": false
+    },
+    {
+      "n": 122,
+      "name": "Walden",
+      "region": "NORTHWEST & STEAMBOAT",
+      "lat": 40.73,
+      "lon": -106.28,
+      "been": false
+    },
+    {
+      "n": 123,
+      "name": "Kremmling",
+      "region": "NORTHWEST & STEAMBOAT",
+      "lat": 40.06,
+      "lon": -106.39,
+      "been": false
+    },
+    {
+      "n": 124,
+      "name": "Hot Sulphur Springs",
+      "region": "NORTHWEST & STEAMBOAT",
+      "lat": 40.07,
+      "lon": -106.1,
+      "been": false
+    },
+    {
+      "n": 125,
+      "name": "Sterling",
+      "region": "EASTERN PLAINS",
+      "lat": 40.63,
+      "lon": -103.21,
+      "been": false
+    },
+    {
+      "n": 126,
+      "name": "Fort Morgan",
+      "region": "EASTERN PLAINS",
+      "lat": 40.25,
+      "lon": -103.8,
+      "been": false
+    },
+    {
+      "n": 127,
+      "name": "Brush",
+      "region": "EASTERN PLAINS",
+      "lat": 40.26,
+      "lon": -103.63,
+      "been": false
+    },
+    {
+      "n": 128,
+      "name": "Limon",
+      "region": "EASTERN PLAINS",
+      "lat": 39.26,
+      "lon": -103.69,
+      "been": false
+    },
+    {
+      "n": 129,
+      "name": "Burlington",
+      "region": "EASTERN PLAINS",
+      "lat": 39.3,
+      "lon": -102.27,
+      "been": false
+    },
+    {
+      "n": 130,
+      "name": "Akron",
+      "region": "EASTERN PLAINS",
+      "lat": 40.16,
+      "lon": -103.21,
+      "been": false
+    },
+    {
+      "n": 131,
+      "name": "Yuma",
+      "region": "EASTERN PLAINS",
+      "lat": 40.12,
+      "lon": -102.72,
+      "been": false
+    },
+    {
+      "n": 132,
+      "name": "Wray",
+      "region": "EASTERN PLAINS",
+      "lat": 40.08,
+      "lon": -102.22,
+      "been": false
+    },
+    {
+      "n": 133,
+      "name": "Holyoke",
+      "region": "EASTERN PLAINS",
+      "lat": 40.58,
+      "lon": -102.3,
+      "been": false
+    },
+    {
+      "n": 134,
+      "name": "Julesburg",
+      "region": "EASTERN PLAINS",
+      "lat": 40.99,
+      "lon": -102.26,
+      "been": false
+    },
+    {
+      "n": 135,
+      "name": "Lamar",
+      "region": "EASTERN PLAINS",
+      "lat": 38.09,
+      "lon": -102.62,
+      "been": false
+    },
+    {
+      "n": 136,
+      "name": "La Junta",
+      "region": "EASTERN PLAINS",
+      "lat": 37.99,
+      "lon": -103.54,
+      "been": false
+    },
+    {
+      "n": 137,
+      "name": "Rocky Ford",
+      "region": "EASTERN PLAINS",
+      "lat": 38.05,
+      "lon": -103.72,
+      "been": false
+    },
+    {
+      "n": 138,
+      "name": "Las Animas",
+      "region": "EASTERN PLAINS",
+      "lat": 38.07,
+      "lon": -103.22,
+      "been": false
+    },
+    {
+      "n": 139,
+      "name": "Eads",
+      "region": "EASTERN PLAINS",
+      "lat": 38.48,
+      "lon": -102.78,
+      "been": false
+    },
+    {
+      "n": 140,
+      "name": "Springfield",
+      "region": "EASTERN PLAINS",
+      "lat": 37.41,
+      "lon": -102.62,
+      "been": false
+    },
+    {
+      "n": 141,
+      "name": "Cheyenne Wells",
+      "region": "EASTERN PLAINS",
+      "lat": 38.82,
+      "lon": -102.35,
+      "been": false
+    },
+    {
+      "n": 142,
+      "name": "Bennett",
+      "region": "EASTERN PLAINS",
+      "lat": 39.76,
+      "lon": -104.43,
+      "been": false
+    },
+    {
+      "n": 143,
+      "name": "Strasburg",
+      "region": "EASTERN PLAINS",
+      "lat": 39.74,
+      "lon": -104.32,
+      "been": false
+    },
+    {
+      "n": 144,
+      "name": "Deer Trail",
+      "region": "EASTERN PLAINS",
+      "lat": 39.62,
+      "lon": -104.04,
+      "been": false
+    }
+  ],
+  "_coTownsNote": "Set been:true for towns visited. The Colorado view lights them.",
+  "fourteeners": [
+    {
+      "name": "Mt. Elbert",
+      "lat": 39.1178,
+      "lon": -106.4453,
+      "ft": 14440,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 9.5,
+      "gain": 4700,
+      "drive": "2h10",
+      "group": "Elbert"
+    },
+    {
+      "name": "Mt. Massive",
+      "lat": 39.1875,
+      "lon": -106.4757,
+      "ft": 14428,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 13.5,
+      "gain": 4500,
+      "drive": "2h15",
+      "group": "Massive"
+    },
+    {
+      "name": "Mt. Harvard",
+      "lat": 38.9244,
+      "lon": -106.3207,
+      "ft": 14421,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Blanca Peak",
+      "lat": 37.5775,
+      "lon": -105.4856,
+      "ft": 14351,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "La Plata Peak",
+      "lat": 39.0294,
+      "lon": -106.4729,
+      "ft": 14343,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 9.25,
+      "gain": 4300,
+      "drive": "2h05",
+      "group": "La Plata"
+    },
+    {
+      "name": "Uncompahgre Peak",
+      "lat": 38.0717,
+      "lon": -107.4622,
+      "ft": 14321,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 7.5,
+      "gain": 3000,
+      "drive": "6h00",
+      "group": "Uncompahgre"
+    },
+    {
+      "name": "Crestone Peak",
+      "lat": 37.9669,
+      "lon": -105.5853,
+      "ft": 14300,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Lincoln",
+      "lat": 39.3515,
+      "lon": -106.1115,
+      "ft": 14293,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 1.5,
+      "gain": 600,
+      "drive": "1h50",
+      "group": "DeCaLiBron"
+    },
+    {
+      "name": "Castle Peak",
+      "lat": 39.0097,
+      "lon": -106.8613,
+      "ft": 14279,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Antero",
+      "lat": 38.6741,
+      "lon": -106.246,
+      "ft": 14276,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 16.0,
+      "gain": 5200,
+      "drive": "2h40",
+      "group": "Antero"
+    },
+    {
+      "name": "Grays Peak",
+      "lat": 39.6339,
+      "lon": -105.8175,
+      "ft": 14275,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 8.0,
+      "gain": 3000,
+      "drive": "1h10",
+      "group": "Grays+Torreys"
+    },
+    {
+      "name": "Torreys Peak",
+      "lat": 39.6427,
+      "lon": -105.8213,
+      "ft": 14272,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 8.5,
+      "gain": 3300,
+      "drive": "1h10",
+      "group": "Grays+Torreys"
+    },
+    {
+      "name": "Quandary Peak",
+      "lat": 39.3973,
+      "lon": -106.1064,
+      "ft": 14271,
+      "summited": false,
+      "planned": true,
+      "ranked": true,
+      "cls": 1,
+      "mi": 6.75,
+      "gain": 3450,
+      "drive": "1h30",
+      "group": "Quandary"
+    },
+    {
+      "name": "Mt. Evans",
+      "lat": 39.5883,
+      "lon": -105.6438,
+      "ft": 14264,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 5.5,
+      "gain": 2000,
+      "drive": "1h20",
+      "group": "Evans"
+    },
+    {
+      "name": "Longs Peak",
+      "lat": 40.2549,
+      "lon": -105.6151,
+      "ft": 14259,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Wilson",
+      "lat": 37.8392,
+      "lon": -107.991,
+      "ft": 14252,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Shavano",
+      "lat": 38.6191,
+      "lon": -106.2394,
+      "ft": 14229,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 9.0,
+      "gain": 4400,
+      "drive": "2h40",
+      "group": "Shavano+Tabeguache"
+    },
+    {
+      "name": "Mt. Princeton",
+      "lat": 38.7492,
+      "lon": -106.2422,
+      "ft": 14197,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 6.5,
+      "gain": 3200,
+      "drive": "2h30",
+      "group": "Princeton"
+    },
+    {
+      "name": "Mt. Belford",
+      "lat": 38.9607,
+      "lon": -106.3607,
+      "ft": 14197,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 8.0,
+      "gain": 4500,
+      "drive": "2h30",
+      "group": "Belford+Oxford"
+    },
+    {
+      "name": "Crestone Needle",
+      "lat": 37.9647,
+      "lon": -105.5766,
+      "ft": 14197,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Yale",
+      "lat": 38.8442,
+      "lon": -106.3138,
+      "ft": 14196,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 9.5,
+      "gain": 4300,
+      "drive": "2h20",
+      "group": "Yale"
+    },
+    {
+      "name": "Mt. Bross",
+      "lat": 39.3352,
+      "lon": -106.1075,
+      "ft": 14172,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 1.5,
+      "gain": 500,
+      "drive": "1h50",
+      "group": "DeCaLiBron"
+    },
+    {
+      "name": "Kit Carson Peak",
+      "lat": 37.9797,
+      "lon": -105.6022,
+      "ft": 14165,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Maroon Peak",
+      "lat": 39.0708,
+      "lon": -106.9889,
+      "ft": 14163,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Tabeguache Peak",
+      "lat": 38.6255,
+      "lon": -106.2508,
+      "ft": 14155,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 11.0,
+      "gain": 4900,
+      "drive": "2h40",
+      "group": "Shavano+Tabeguache"
+    },
+    {
+      "name": "Mt. Oxford",
+      "lat": 38.9645,
+      "lon": -106.3384,
+      "ft": 14153,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 11.0,
+      "gain": 5400,
+      "drive": "2h30",
+      "group": "Belford+Oxford"
+    },
+    {
+      "name": "Mt. Sneffels",
+      "lat": 38.0038,
+      "lon": -107.7923,
+      "ft": 14150,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 3,
+      "mi": 6.0,
+      "gain": 2900,
+      "drive": "6h00",
+      "group": "Sneffels"
+    },
+    {
+      "name": "Mt. Democrat",
+      "lat": 39.3395,
+      "lon": -106.1399,
+      "ft": 14148,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 3.5,
+      "gain": 2100,
+      "drive": "1h50",
+      "group": "DeCaLiBron"
+    },
+    {
+      "name": "Capitol Peak",
+      "lat": 39.1503,
+      "lon": -107.0831,
+      "ft": 14130,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Pikes Peak",
+      "lat": 38.8409,
+      "lon": -105.0442,
+      "ft": 14115,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 1,
+      "mi": 13.0,
+      "gain": 7400,
+      "drive": "1h30",
+      "group": "Pikes"
+    },
+    {
+      "name": "Snowmass Mountain",
+      "lat": 39.1187,
+      "lon": -107.0662,
+      "ft": 14092,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Eolus",
+      "lat": 37.622,
+      "lon": -107.6216,
+      "ft": 14083,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Windom Peak",
+      "lat": 37.6212,
+      "lon": -107.5915,
+      "ft": 14082,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Challenger Point",
+      "lat": 37.9808,
+      "lon": -105.6069,
+      "ft": 14081,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Columbia",
+      "lat": 38.9039,
+      "lon": -106.2975,
+      "ft": 14073,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Missouri Mountain",
+      "lat": 38.9475,
+      "lon": -106.3781,
+      "ft": 14067,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Humboldt Peak",
+      "lat": 37.9761,
+      "lon": -105.5551,
+      "ft": 14064,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Bierstadt",
+      "lat": 39.5825,
+      "lon": -105.6686,
+      "ft": 14060,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 7.0,
+      "gain": 2850,
+      "drive": "1h15",
+      "group": "Bierstadt"
+    },
+    {
+      "name": "Sunlight Peak",
+      "lat": 37.6274,
+      "lon": -107.5952,
+      "ft": 14059,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Handies Peak",
+      "lat": 37.913,
+      "lon": -107.5042,
+      "ft": 14048,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 1,
+      "mi": 5.5,
+      "gain": 2500,
+      "drive": "6h00",
+      "group": "Handies"
+    },
+    {
+      "name": "Culebra Peak",
+      "lat": 37.1224,
+      "lon": -105.1856,
+      "ft": 14047,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Lindsey",
+      "lat": 37.5839,
+      "lon": -105.445,
+      "ft": 14042,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Ellingwood Point",
+      "lat": 37.5825,
+      "lon": -105.4922,
+      "ft": 14042,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Little Bear Peak",
+      "lat": 37.5666,
+      "lon": -105.4972,
+      "ft": 14037,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Mt. Sherman",
+      "lat": 39.2251,
+      "lon": -106.1695,
+      "ft": 14036,
+      "summited": true,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 5.25,
+      "gain": 2100,
+      "drive": "1h50",
+      "group": "Sherman"
+    },
+    {
+      "name": "Redcloud Peak",
+      "lat": 37.9409,
+      "lon": -107.4218,
+      "ft": 14034,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 9.0,
+      "gain": 3700,
+      "drive": "6h00",
+      "group": "Redcloud+Sunshine"
+    },
+    {
+      "name": "Pyramid Peak",
+      "lat": 39.0715,
+      "lon": -106.95,
+      "ft": 14018,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Wilson Peak",
+      "lat": 37.8603,
+      "lon": -107.9848,
+      "ft": 14017,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Wetterhorn Peak",
+      "lat": 38.0606,
+      "lon": -107.5109,
+      "ft": 14015,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "San Luis Peak",
+      "lat": 37.9869,
+      "lon": -106.9311,
+      "ft": 14014,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 1,
+      "mi": 13.5,
+      "gain": 3600,
+      "drive": "5h00",
+      "group": "San Luis"
+    },
+    {
+      "name": "Mt. of the Holy Cross",
+      "lat": 39.4668,
+      "lon": -106.4816,
+      "ft": 14005,
+      "summited": false,
+      "planned": false,
+      "ranked": true
+    },
+    {
+      "name": "Huron Peak",
+      "lat": 38.9453,
+      "lon": -106.438,
+      "ft": 14003,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 6.5,
+      "gain": 3500,
+      "drive": "2h30",
+      "group": "Huron"
+    },
+    {
+      "name": "Sunshine Peak",
+      "lat": 37.9226,
+      "lon": -107.4256,
+      "ft": 14001,
+      "summited": false,
+      "planned": false,
+      "ranked": true,
+      "cls": 2,
+      "mi": 11.5,
+      "gain": 4400,
+      "drive": "6h00",
+      "group": "Redcloud+Sunshine"
+    },
+    {
+      "name": "Mt. Cameron",
+      "lat": 39.3466,
+      "lon": -106.1188,
+      "ft": 14238,
+      "summited": false,
+      "planned": false,
+      "ranked": false,
+      "cls": 2,
+      "mi": 1.0,
+      "gain": 500,
+      "drive": "1h50",
+      "group": "DeCaLiBron"
+    },
+    {
+      "name": "El Diente Peak",
+      "lat": 37.8394,
+      "lon": -108.0055,
+      "ft": 14159,
+      "summited": false,
+      "planned": false,
+      "ranked": false
+    },
+    {
+      "name": "Conundrum Peak",
+      "lat": 39.0156,
+      "lon": -106.8637,
+      "ft": 14060,
+      "summited": false,
+      "planned": false,
+      "ranked": false
+    },
+    {
+      "name": "North Eolus",
+      "lat": 37.6247,
+      "lon": -107.6212,
+      "ft": 14039,
+      "summited": false,
+      "planned": false,
+      "ranked": false
+    },
+    {
+      "name": "North Maroon Peak",
+      "lat": 39.0761,
+      "lon": -106.9873,
+      "ft": 14014,
+      "summited": false,
+      "planned": false,
+      "ranked": false
+    }
+  ],
+  "_ftNote": "summited:true when you top out. planned:true shows it gold on the Colorado view."
 }
