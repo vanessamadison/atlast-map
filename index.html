@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+<meta name="theme-color" content="#070907">
+<meta name="description" content="ATLAST — a coverage map of everywhere actually stood in, and a planning tool for everywhere not.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>ATLAST — coverage</title>
 <style>
 :root{
@@ -13,8 +18,10 @@
 *{box-sizing:border-box}
 html,body{height:100%}
 body{margin:0;background:var(--bg);color:var(--ink);
- font:15px/1.5 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden}
-#c{position:fixed;inset:0;display:block}
+ font:15px/1.5 ui-sans-serif,system-ui,-apple-system,sans-serif;overflow:hidden;
+ -webkit-text-size-adjust:100%;overscroll-behavior:none}
+/* touch-action:none, or every drag on the map also scrolls and rubber-bands the page */
+#c{position:fixed;inset:0;display:block;touch-action:none}
 
 /* ── header ─────────────────────────────────────────────────────────── */
 #top{position:fixed;top:0;left:0;right:0;z-index:10;padding:15px 20px;display:flex;gap:10px;
@@ -29,6 +36,23 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .pill.warn{color:var(--warn);border-color:rgba(224,160,107,.34)}
 #sub{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
  color:var(--dim);margin-left:2px}
+#back{pointer-events:auto;display:none;align-items:center;gap:2px;
+ background:rgba(227,199,101,.1);border:1px solid rgba(227,199,101,.3);border-radius:20px;
+ padding:3px 6px}
+#back.on{display:inline-flex}
+#back button{background:none;border:none;cursor:pointer;padding:3px 8px;border-radius:14px;
+ font:600 9px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ transition:.14s}
+#back button:hover{background:rgba(227,199,101,.2);color:#f6ecc2}
+#back button.here{color:var(--ink);cursor:default}
+#back button.here:hover{background:none;color:var(--ink)}
+#back .sep{color:rgba(227,199,101,.45);font-size:10px;line-height:1}
+
+/* ── drill-down wipe: the push-in between an overview and a region ───── */
+#wipe{position:fixed;inset:0;z-index:13;pointer-events:none;opacity:0;
+ transition:opacity .18s ease-out;
+ background:radial-gradient(ellipse at 50% 45%,rgba(7,9,7,.35) 0%,rgba(7,9,7,.97) 72%)}
+#wipe.on{opacity:1}
 
 /* ── mode switch ────────────────────────────────────────────────────── */
 #modes{position:fixed;top:12px;right:20px;z-index:14;display:flex;gap:4px}
@@ -167,17 +191,72 @@ body{margin:0;background:var(--bg);color:var(--ink);
  color:var(--dim)}
 #err{position:fixed;left:20px;top:62px;z-index:21;color:#e08b6b;font:11px var(--mono);
  max-width:70ch;white-space:pre-wrap;pointer-events:none}
-@media (max-width:760px){
- #cardhost{width:100vw;border-left:none}
- #stats{gap:14px} #stats b{font-size:19px} #hint{display:none}
+/* ── phone ───────────────────────────────────────────────────────────────
+   Same map, different furniture. The card becomes a bottom sheet, the mode switch moves to
+   the bottom where a thumb actually is, and everything respects the notch. app.js reads the
+   same 820px breakpoint to drop terrain resolution to something a phone GPU can carry. */
+@media (max-width:820px){
+ #top{padding:calc(10px + env(safe-area-inset-top)) 14px 10px;gap:7px}
+ #top h1{font-size:14px;letter-spacing:.12em}
+ #top .pill.on:not(#src):not(#build){display:none}   /* "verified in person" — not on a phone */
+ #sub{display:none}
+ .pill{font-size:7.5px;padding:3px 7px}
+ #back{padding:2px 4px}
+ #back button{padding:4px 7px;font-size:8.5px}
+
+ /* mode switch: bottom, thumb-height, out of the way of the notch */
+ #modes{top:auto;bottom:calc(12px + env(safe-area-inset-bottom));left:14px;right:14px;
+  justify-content:center;gap:6px}
+ #modes button{flex:1;max-width:150px;padding:11px 10px;font-size:10px}
+ #modes button i{display:none}
+
+ #stats{left:14px;right:14px;bottom:calc(66px + env(safe-area-inset-bottom));gap:16px;
+  overflow-x:auto;justify-content:space-between;padding-bottom:2px;
+  pointer-events:auto;scrollbar-width:none}
+ #stats::-webkit-scrollbar{display:none}
+ #stats b{font-size:17px}
+ #stats span{font-size:7px;letter-spacing:.1em}
+ #hint{display:none}
+
+ /* the card becomes a sheet */
+ #cardhost{top:auto;left:0;right:0;bottom:0;width:100vw;height:72vh;
+  border-left:none;border-top:1px solid var(--line);border-radius:16px 16px 0 0;
+  transform:translateY(102%);
+  padding-bottom:env(safe-area-inset-bottom);
+  box-shadow:0 -20px 60px rgba(0,0,0,.65)}
+ #cardhost.open{transform:none}
+ #cardhost::before{content:"";position:sticky;top:0;display:block;width:38px;height:4px;
+  margin:8px auto 0;border-radius:4px;background:rgba(238,242,234,.22)}
+ .chead{padding:10px 16px 13px;border-radius:0}
+ .chead .ccode{width:38px;height:34px;line-height:32px;font-size:13px}
+ .ctitle h2{font-size:18px}
+ .cbody{padding:2px 16px 0}
+ .card{padding-bottom:20px}
+ .chead .x{width:34px;height:34px;font-size:19px}
+ .star{width:38px;height:34px}
+ .field input,.sv-keyrow input,.sv-sel{font-size:16px}  /* 16px or iOS zooms the page on focus */
+ .sv iframe{height:180px}
+
+ /* modes and stats would sit under the sheet; hide rather than fight it */
+ body.card-open #modes,body.card-open #stats{opacity:0;pointer-events:none}
+ #modes,#stats{transition:opacity .18s}
+}
+@media (max-width:820px) and (orientation:landscape){
+ #cardhost{height:100vh;width:min(400px,62vw);top:0;left:auto;
+  border-radius:0;border-left:1px solid var(--line);border-top:none;
+  transform:translateX(102%)}
+ #cardhost.open{transform:none}
+ #cardhost::before{display:none}
+ body.card-open #modes,body.card-open #stats{opacity:1;pointer-events:auto}
 }
 </style></head><body>
 <canvas id="c"></canvas>
 
 <div id="top">
   <h1><span class="atl">ATLAS</span><span class="t">T</span></h1>
+  <nav id="back"></nav>
   <span class="pill on">verified in person</span>
-  <span class="pill" id="build">at-r7.0</span>
+  <span class="pill" id="build">at-r9.0</span>
   <span class="pill" id="src">loading</span>
   <span id="sub">loading</span>
 </div>
@@ -193,11 +272,12 @@ body{margin:0;background:var(--bg);color:var(--ink);
 <div id="hint"></div>
 <div id="err"></div>
 <div id="cardhost"></div>
+<div id="wipe"></div>
 <div id="load">at last</div>
 
 <script type="importmap">
 {"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js",
 "three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}
 </script>
-<script type="module" src="./app.js?v=7"></script>
+<script type="module" src="./app.js?v=12"></script>
 </body></html>

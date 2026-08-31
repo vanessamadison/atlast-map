@@ -5,8 +5,8 @@
 // routes crossed it). Nothing is generated to fill space. Where a fact is not recorded, the
 // card says it is not recorded and gives her a field to record it.
 
-import { STATE } from "./states.js?v=7";
-import { store } from "./store.js?v=7";
+import { STATE } from "./states.js?v=12";
+import { store } from "./store.js?v=12";
 
 const $ = (t, cls, html) => {
   const e = document.createElement(t);
@@ -24,6 +24,7 @@ export function mountCard(el, closeCb) { host = el; onClose = closeCb; }
 export function closeCard() {
   if (!host) return;
   host.classList.remove("open");
+  document.body.classList.remove("card-open");
   setTimeout(() => { if (!host.classList.contains("open")) host.innerHTML = ""; }, 220);
   onClose?.();
 }
@@ -305,6 +306,7 @@ export function openState(code, ctx) {
 
   host.appendChild(card);
   host.classList.add("open");
+  document.body.classList.add("card-open");
   host.scrollTop = 0;
 }
 
@@ -358,5 +360,6 @@ export function openCountry(name, ctx) {
 
   host.appendChild(card);
   host.classList.add("open");
+  document.body.classList.add("card-open");
   host.scrollTop = 0;
 }

@@ -12,11 +12,16 @@ export const S = {
   SLAB_US: 0.55,       // 25 km thick plinth for an unvisited state
   SLAB_US_ON: 0.95,    // 43 km — visited states stand proud of the rest
   SLAB_CO: 2.20,       // 13 km thick plinth under the Colorado terrain
+  SLAB_REGION: 2.20,   // any drilled-in region: 13 km for Colorado, 29 km for Texas
   INSET_SLAB: 0.45,    // 20 km — Alaska / Hawaii insets
 
   // ── relief ─────────────────────────────────────────────────────────────
-  RELIEF_CO: 6.00,     // 37 km of vertical for 11,000 ft of real range → ~11x exaggerated
-  RELIEF_US: 2.00,     // reserved; the USA view is extruded polygons, not a heightfield
+  // ONE exaggeration factor, everywhere. Relief is then derived per view from that view's
+  // kilometres-per-unit, which is the only way Colorado, Texas and the globe can be compared
+  // to each other. Flat states come out flat, because they are flat — that is information,
+  // not a bug, and the header pill states the factor so nobody reads it as topography.
+  EXAG: 14,
+  RELIEF_CO: 6.00,     // legacy constant, retained so terrain.js callers keep working
 
   // ── markers ────────────────────────────────────────────────────────────
   DOT: 0.20,           // 9 km radius on the USA view, 1.2 km on Colorado
@@ -31,7 +36,24 @@ export const S = {
   // ── lines ──────────────────────────────────────────────────────────────
   RIVER: 0.10,         // 4.5 km wide at national scale
   ROAD: 0.13,          // 5.9 km
-  GLOBE_R: 34,         // globe radius in units
+  GLOBE_R: 34,         // 6,371 km over 34 units → 1 unit ≈ 187 km
+  GLOBE_HALO: 0.80,    // 150 km — a city's logged footprint, not a continent-sized blob
+  GLOBE_DOT: 0.085,    // 16 km — the place itself. Was 0.20 (37 km) and read as a marble.
+};
+
+// Scene units of relief for a given real elevation range, at a given map scale.
+// rangeFt   the elevation span the terrain covers
+// kmPerUnit how many kilometres one scene unit is worth in this view
+export function reliefUnits(rangeFt, kmPerUnit, exag = S.EXAG) {
+  return (rangeFt * 0.0003048 * exag) / kmPerUnit;
+}
+
+// Visited reads greener, unvisited reads drained. Applied over the elevation ramp so the
+// coverage language survives without throwing away the topography.
+export const TINT = {
+  on: [0.94, 1.12, 0.82],
+  off: [0.72, 0.76, 0.74],
+  neutral: [1, 1, 1],
 };
 
 // Colour language. green = been · gold = next · dim = not yet · white = summited

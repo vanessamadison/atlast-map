@@ -1,0 +1,2 @@
+ATLAST is plain static files. This tells GitHub Pages to serve them as-is rather than running
+Jekyll over them, which is faster to deploy and cannot silently swallow a file.

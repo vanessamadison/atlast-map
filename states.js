@@ -76,8 +76,38 @@ ABBR["District of Columbia"] = "DC";
 ABBR["Virgin Islands"] = "VI";
 ABBR["Commonwealth of the Northern Mariana Islands"] = "MP";
 
+// Natural Earth and travel.json do not agree on country names, and the disagreement is silent:
+// travel.json says "United States", the polygon says "United States of America", the visited-set
+// lookup misses, and the country she has covered most renders as "not yet". Everything that
+// compares a country name goes through canonCountry() so that can only happen twice.
+const COUNTRY_ALIAS = {
+  "United States of America": "United States",
+  "United States Virgin Islands": "U.S. Virgin Islands",
+  "Russian Federation": "Russia",
+  "Czechia": "Czech Republic",
+  "Republic of Korea": "South Korea",
+  "Viet Nam": "Vietnam",
+  "Côte d'Ivoire": "Ivory Coast",
+  "Cabo Verde": "Cape Verde",
+  "Eswatini": "Swaziland",
+  "Türkiye": "Turkey",
+  "Bosnia and Herz.": "Bosnia and Herzegovina",
+  "Dominican Rep.": "Dominican Republic",
+  "Central African Rep.": "Central African Republic",
+  "S. Sudan": "South Sudan",
+  "Dem. Rep. Congo": "Democratic Republic of the Congo",
+  "Eq. Guinea": "Equatorial Guinea",
+  "Solomon Is.": "Solomon Islands",
+  "Falkland Is.": "Falkland Islands",
+  "United Republic of Tanzania": "Tanzania",
+  "Lao PDR": "Laos",
+  "Macedonia": "North Macedonia",
+};
+export const canonCountry = n => COUNTRY_ALIAS[n] || n;
+
 // Which continent a country sits on, for the globe's continent count. Only the eight she has
 // actually been to plus the obvious groupings she is working toward — not a full gazetteer.
+// Keys are canonical names.
 export const CONTINENT = {
   "United States": "North America", Canada: "North America", Mexico: "North America",
   Peru: "South America", Japan: "Asia", France: "Europe", Belgium: "Europe",

@@ -21,7 +21,8 @@ person. Her goal is coverage: **63 US national parks, 58 Colorado fourteeners, 1
 | File | Role |
 |---|---|
 | `index.html` | shell, styles, card look. No logic. |
-| `app.js` | scene, three views, interaction |
+| `app.js` | scene, views, drill-down, interaction |
+| `region.js` | slab + terrain geometry for any state or country — the one implementation |
 | `card.js` | state and country cards |
 | `travel.json` | **her data. The only file she edits.** |
 | `parks.js` | all 63 parks, `name` must match exactly |
@@ -34,13 +35,18 @@ person. Her goal is coverage: **63 US national parks, 58 Colorado fourteeners, 1
 | `serve.sh` | no-cache server + `POST /__save` |
 | `verify.mjs` | pre-flight checks — run it |
 
-## THE THREE VIEWS
+## TWO OVERVIEWS, ONE DRILL-DOWN
 
-- **USA** — fixed top-down camera, pan and zoom, rotation locked. Extruded state slabs, visited
-  ones raised and tinted. Alaska and Hawaii as insets. **Click a state → card.**
-- **Colorado** — the same extruded slab with real DEM terrain stacked on it, clipped to the true
-  border. 58 fourteeners, 144 towns, rivers, routes. Orbit allowed here.
-- **Globe** — every border lit; visited countries filled, brightness by places logged.
+- **USA** — fixed top-down camera, pan and zoom, rotation locked. Extruded state slabs with real
+  DEM terrain on top of each, clipped per state. Alaska and Hawaii as insets.
+- **Globe** — every border lit. Visited countries are **not filled**; what lights up is her
+  footprint — halos at logged cities, her real routes on the sphere, a bright border. Subtle
+  real relief on the sphere itself.
+- **Region** — click a state or a lit country and drop into it. Slab + DEM terrain + her markers
+  + the card. Colorado is just the region that also has towns and fourteeners. Back chip / Escape.
+
+Every region gets its own Lambert azimuthal equal-area projection. Albers is correct for the
+contiguous US and wrong everywhere else.
 
 **No permanent labels.** Only the thing under the cursor is named. This was a deliberate reversal.
 
@@ -85,7 +91,19 @@ check that first.
 **9. −90° about X keeps the surface normal up. +90° flips it and `FrontSide` culling deletes the
 whole terrain with no error.** `DoubleSide` is insurance and is on.
 
-**10. Never claim DEM fidelity for procedural output.** `dem.js` reports how many tiles it got and
+**10. Natural Earth and travel.json disagree on country names, silently.** travel.json says
+"United States", the polygon says "United States of America", the visited-set lookup misses, and
+the country she has covered most renders "not yet" on its card and unlit on the globe, with no
+error anywhere. Every name goes through `canonCountry()` and polygon names are canonicalised at
+decode. `warnUnmatchedCountries()` logs anything in `countriesVisited` with no polygon — read the
+console before trusting the globe.
+
+**11. Clip terrain with the scanline span fill, not point-in-polygon per cell.** Same even-odd
+result, work drops from cells×edges to rows×edges, and that is what pays for the resolution.
+`verify.mjs` diffs the two implementations cell-for-cell over a concave shape, a shape with a
+hole, and disjoint blobs. If you change one, that test fails.
+
+**12. Never claim DEM fidelity for procedural output.** `dem.js` reports how many tiles it got and
 the header pill turns amber and says "procedural" when the real thing did not load.
 
 ## WHAT IS STILL OPEN
@@ -104,5 +122,11 @@ the header pill turns amber and says "procedural" when the real thing did not lo
 - **Never commit or push without her say-so.** Hand her the command.
 - **Never invent a visit, a distance, an elevation, a price or a road closure.** Unsure? Say so.
 - `travel.json` is the source of truth. Park names must match `parks.js` exactly.
-- Verify before shipping: `node --check` every module, then `node verify.mjs`, then **load it and
-  look at it**. Four builds shipped broken because nobody looked.
+- Verify before shipping: `node verify.mjs`, then **load it and look at it**. Four builds shipped
+  broken because nobody looked.
+- **`node --check foo.js` does not catch ES module syntax errors.** It parses the file as an
+  ambiguous CommonJS script and skips the module-level early errors. A duplicate `const` in the
+  same scope passes `--check` cleanly and then throws "Identifier has already been declared" the
+  moment a browser loads it — that shipped once. The working form is
+  `node --check --input-type=module < foo.js`, which only reads stdin. `verify.mjs` now runs it
+  over every file as its first check, so just run `verify.mjs` and never trust bare `--check`.

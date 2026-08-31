@@ -8,21 +8,47 @@ everywhere I have not.
 
 Three.js, no build step, deployed on GitHub Pages.
 
-## The three views
+## Two overviews and one drill-down
 
 **USA** — the primary view. Fixed top-down camera over all 50 states plus DC; pan and zoom, no
-free orbit. Real state polygons from `us-atlas@3/states-10m`, extruded into slabs — visited states
-stand proud and tinted. Alaska and Hawaii as insets so "all 50" is literally true. **Click any
-state to open its card.** Unvisited states are the point, not the leftovers: every card carries
-that state's parks, landmarks, high point and an editable priority.
+free orbit. Real state polygons from `us-atlas@3/states-10m`, extruded into slabs with **real
+elevation terrain sitting on top of each one**, clipped to that state's border. Visited states
+stand proud and tinted green; unvisited are drained but still fully rendered. Alaska and Hawaii as
+insets so "all 50" is literally true.
 
-**Colorado** — the real state polygon extruded into the same slab, with **real elevation** stacked
-on top of it and clipped to the true border by point-in-polygon. 58 fourteeners as
-elevation-scaled shafts, 144 towns, rivers, and her drive routes.
+**Globe** — every country and US state border lit. Visited countries are **not** filled in. What
+lights up is the footprint she can actually evidence: a halo at each logged city, her real drive
+and rail routes drawn on the sphere, and a bright border. A country she has barely touched looks
+barely touched. The sphere itself carries subtle real relief from a low-zoom world DEM.
 
-**Globe** — every country and state border lit. Visited countries **filled**, not outlined, with
-fill brightness tracking how many places she has logged inside that border. Click a country for
-its card.
+**Region** — click any state, or any lit country, and you drop into it. Countries with a
+verified subdivision dataset route to their sub-regions instead of rendering whole: clicking the
+US on the globe lands on the state view, not one continent-sized slab. Only the US qualifies
+today — `world-atlas` is country-level at every resolution and there is no province layer in the
+stack. `SUBDIVIDED` in `app.js` is where more go once a dataset is verified.
+
+Getting back: a clickable breadcrumb in the header, Escape, or just **zoom out** past the
+region's extent and it pops to the parent view. Same treatment
+everywhere: extruded slab, real DEM terrain clipped to the real border, her parks, cities and
+routes on top, and the card alongside. Colorado is not special-cased any more — it is just the
+region that also has 144 towns and 58 fourteeners. Back chip in the header, or Escape.
+
+Every region gets a projection built for that region (Lambert azimuthal equal-area), because
+Albers is right for the contiguous US and wrong for Peru, Japan or Alaska.
+
+## Vertical exaggeration is one number
+
+`S.EXAG` is 14, everywhere — Colorado, Texas, the contiguous US, the globe. Relief is derived per
+view from that view's kilometres-per-unit, which is the only way the views can be compared to
+each other. The header pill states the factor, and `?exag=22` turns it up — the pill always shows
+the number actually in use, so more drama is a choice you can see rather than a lie the map tells
+you. `verify.mjs` fails the build if any view drifts off whatever the number is.
+
+**Low relief still reads.** A linear ramp keyed to Mount Whitney renders the whole eastern US as
+one flat green sheet, so terrain colour is compressed (`t^0.55`) and brightness responds to
+**local slope**, which is scale-free. The Appalachians, the Driftless and the Ozarks show up as
+ridges without their height being exaggerated past everything else. That is shading, not
+geometry — the heights stay honest.
 
 ## Labels
 
@@ -65,13 +91,43 @@ panorama means Google has no coverage there, not that anything is broken.
 
 ## Elevation
 
-Colorado's terrain is real: **Tilezen terrarium tiles** from the open AWS `elevation-tiles-prod`
-bucket, decoded as `(R × 256 + G + B ÷ 256) − 32768` metres. Default zoom 7, roughly 1 km per
-pixel; `?dem=8` doubles it at the cost of about four times the tiles.
+Terrain is real: **Tilezen terrarium tiles** from the open AWS `elevation-tiles-prod` bucket,
+decoded as `(R × 256 + G + B ÷ 256) − 32768` metres.
+
+- **Zoom is chosen from a tile budget**, not fixed. Colorado lands on z8, Alaska on z5, and both
+  cost about the same number of requests. `?tiles=96` raises the budget; `?tiles=16` lowers it.
+- **Tiles are cached for the life of the page**, so USA → Texas → globe → Texas is free the
+  second time. Failures are cached too, so a dead tile is not retried on every view.
+- **Coarse first, fine second.** A low-resolution pass paints immediately so a view never stalls,
+  then the full-resolution terrain swaps in underneath the markers.
 
 `terrain.js` — the old procedural model, honest about being an approximation — stays as the
 fallback. **The header pill says which one is actually on screen.** If the tiles do not load you
-get procedural relief and the pill turns amber and says so.
+get procedural relief and the pill turns amber and says so. Outside the US there is no procedural
+model, so a country with no tiles renders flat rather than inventing mountains.
+
+## On a phone
+
+Same map, different furniture. Below 820px the card becomes a bottom sheet, the mode switch
+moves to the bottom where a thumb actually is, and everything respects the notch. One finger
+pans the map and spins the globe; two fingers zoom and tilt. There is no hover on a phone, so
+tapping something with no card behind it shows its label for a couple of seconds instead.
+
+Terrain resolution, elevation tile count and globe sphere density all drop together on a small
+screen — a 480k-cell mesh and 64 elevation tiles would drop a phone to single-figure frames and
+eat someone's data plan doing it. `?tiles=48` overrides that if you are on wifi and impatient.
+
+## Publishing
+
+```bash
+gh repo edit vanessamadison/map --visibility public --accept-visibility-change-consequences
+gh repo rename atlast --repo vanessamadison/map
+git remote set-url origin git@github.com:vanessamadison/atlast.git
+gh api -X POST repos/vanessamadison/atlast/pages -f "source[branch]=master" -f "source[path]=/"
+```
+
+Live at `https://vanessamadison.github.io/atlast/` a minute or so later. Every path in the app is
+relative, so the subdirectory is fine. `.nojekyll` keeps Pages from running Jekyll over it.
 
 ## Updating the data
 
@@ -86,9 +142,14 @@ exactly — "Smoky Mountains" will not match "Great Smoky Mtns". State codes are
 
 ```bash
 cd ~/dd/travel
-node verify.mjs     # imports, cache-busters, mirror test, scale budget in km
+node verify.mjs     # module syntax, imports, cache-busters, mirror test, clip, scale budget
 ./serve.sh          # http://localhost:8080 — no-cache, and travel.json is writable
 ```
+
+Note: **`node --check foo.js` does not catch ES module syntax errors** — it parses the file as an
+ambiguous CommonJS script and skips the module-level early errors, so a duplicate `const` passes
+cleanly and then throws in the browser. `verify.mjs` runs the form that works
+(`--check --input-type=module`) over every file. Use it instead.
 
 `verify.mjs` does not replace looking at it. Nothing does.
 
@@ -97,7 +158,8 @@ node verify.mjs     # imports, cache-busters, mirror test, scale budget in km
 | File | Role |
 |---|---|
 | `index.html` | shell, styles, the card's look |
-| `app.js` | scene, the three views, interaction |
+| `app.js` | scene, views, drill-down, interaction |
+| `region.js` | slab + terrain geometry for any state or country |
 | `card.js` | the state and country cards |
 | `travel.json` | **her data. The only file she edits.** |
 | `parks.js` | all 63 parks — name, state, lat/lon |
