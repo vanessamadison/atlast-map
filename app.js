@@ -1,6 +1,6 @@
 // ATLAST — coverage map. Scene, views, drill-down, interaction.
 //
-// BUILD at-r9.0
+// BUILD at-r9.1
 //
 // Three views and one drill-down. USA and Globe are overviews; clicking anything in either
 // pushes into a region view, which is the Colorado treatment applied generically — extruded
@@ -15,20 +15,20 @@
 
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { PARKS } from "./parks.js?v=12";
-import { elev } from "./terrain.js?v=12";
+import { PARKS } from "./parks.js?v=13";
+import { elev } from "./terrain.js?v=13";
 import {
   decodeTopo, albers, laea, lonLatToSphere, bboxOf, inside,
   lonLatBBox, lonLatBBoxUnwrapped, unwrapFeature,
-} from "./geo.js?v=12";
-import { S, C, TINT, ramp, reliefUnits } from "./style.js?v=12";
-import { STATE, ABBR, CONTINENT, canonCountry } from "./states.js?v=12";
-import { store } from "./store.js?v=12";
-import { loadDEM, loadDEMProgressive, pickZoom, DEM_SOURCE_NOTE } from "./dem.js?v=12";
-import { projectorFor, slabGroup, borderLine, terrainMesh, sampler } from "./region.js?v=12";
-import { mountCard, openState, openCountry, closeCard } from "./card.js?v=12";
+} from "./geo.js?v=13";
+import { S, C, TINT, ramp, reliefUnits } from "./style.js?v=13";
+import { STATE, ABBR, CONTINENT, canonCountry } from "./states.js?v=13";
+import { store } from "./store.js?v=13";
+import { loadDEM, loadDEMProgressive, pickZoom, DEM_SOURCE_NOTE } from "./dem.js?v=13";
+import { projectorFor, slabGroup, borderLine, terrainMesh, sampler } from "./region.js?v=13";
+import { mountCard, openState, openCountry, closeCard } from "./card.js?v=13";
 
-export const BUILD = "at-r9.0";
+export const BUILD = "at-r9.1";
 
 const QS = new URLSearchParams(location.search);
 

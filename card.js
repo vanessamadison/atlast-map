@@ -5,8 +5,8 @@
 // routes crossed it). Nothing is generated to fill space. Where a fact is not recorded, the
 // card says it is not recorded and gives her a field to record it.
 
-import { STATE } from "./states.js?v=12";
-import { store } from "./store.js?v=12";
+import { STATE } from "./states.js?v=13";
+import { store } from "./store.js?v=13";
 
 const $ = (t, cls, html) => {
   const e = document.createElement(t);

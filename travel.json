@@ -1,6 +1,6 @@
 {
   "_comment": "The only file you edit. Add a name to a list, commit, and GitHub Pages redeploys in about a minute.",
-  "updated": "2026-08-24",
+  "updated": "2026-09-30",
   "parksVisited": [
     "Rocky Mountain",
     "Mesa Verde",
@@ -427,6 +427,62 @@
       "why": "pairs with Badlands"
     }
   ],
+  "visits": [
+    {
+      "name": "Boreas Pass",
+      "kind": "pass",
+      "region": "CO",
+      "anchor": "osm:Boreas Pass",
+      "date": "2026-08",
+      "interests": [
+        "trail",
+        "view",
+        "history"
+      ],
+      "note": "Narrow-gauge railroad grade over the divide. Aspen Valley same trip.",
+      "src": "user",
+      "trip": "trip:2026-08-boreas"
+    },
+    {
+      "name": "Aspen Valley",
+      "kind": "valley",
+      "region": "CO",
+      "anchor": "osm:Aspen Valley",
+      "date": "2026-08",
+      "trip": "trip:2026-08-boreas",
+      "interests": [
+        "trail",
+        "view"
+      ],
+      "note": "Part of the Boreas Pass outing.",
+      "src": "user",
+      "needsCoords": true
+    }
+  ],
+  "_visitsNote": "The open log. Anything without its own list goes here. anchor resolves coordinates from OSM so none are invented.",
+  "routesLogged": [],
+  "trips": [
+    {
+      "id": "trip:2026-08-boreas",
+      "name": "Boreas Pass",
+      "region": "CO",
+      "date": "2026-08",
+      "kind": "day",
+      "status": "done",
+      "places": [
+        "Boreas Pass",
+        "Aspen Valley"
+      ],
+      "interests": [
+        "trail",
+        "view",
+        "history"
+      ],
+      "note": "Boreas Pass Road, the old narrow-gauge grade over the divide between Breckenridge and Como. Aspen Valley on the same outing.",
+      "src": "user"
+    }
+  ],
+  "_tripsNote": "A trip groups visits into one outing. Visits reference it by trip id. This is what gets planned, tracked and shared.",
   "stateNotes": {},
   "_stateNotesNote": "Written by the state card. priority 0-5, first visited, and a note. Editable in the map when serve.sh is running.",
   "coTowns": [
@@ -1597,7 +1653,8 @@
       "mi": 9.5,
       "gain": 4700,
       "drive": "2h10",
-      "group": "Elbert"
+      "group": "Elbert",
+      "attempted": false
     },
     {
       "name": "Mt. Massive",
@@ -1611,7 +1668,8 @@
       "mi": 13.5,
       "gain": 4500,
       "drive": "2h15",
-      "group": "Massive"
+      "group": "Massive",
+      "attempted": false
     },
     {
       "name": "Mt. Harvard",
@@ -1620,7 +1678,8 @@
       "ft": 14421,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Blanca Peak",
@@ -1629,7 +1688,8 @@
       "ft": 14351,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "La Plata Peak",
@@ -1643,7 +1703,8 @@
       "mi": 9.25,
       "gain": 4300,
       "drive": "2h05",
-      "group": "La Plata"
+      "group": "La Plata",
+      "attempted": false
     },
     {
       "name": "Uncompahgre Peak",
@@ -1657,7 +1718,8 @@
       "mi": 7.5,
       "gain": 3000,
       "drive": "6h00",
-      "group": "Uncompahgre"
+      "group": "Uncompahgre",
+      "attempted": false
     },
     {
       "name": "Crestone Peak",
@@ -1666,7 +1728,8 @@
       "ft": 14300,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Lincoln",
@@ -1680,7 +1743,8 @@
       "mi": 1.5,
       "gain": 600,
       "drive": "1h50",
-      "group": "DeCaLiBron"
+      "group": "DeCaLiBron",
+      "attempted": false
     },
     {
       "name": "Castle Peak",
@@ -1689,7 +1753,8 @@
       "ft": 14279,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Antero",
@@ -1703,35 +1768,38 @@
       "mi": 16.0,
       "gain": 5200,
       "drive": "2h40",
-      "group": "Antero"
+      "group": "Antero",
+      "attempted": false
     },
     {
       "name": "Grays Peak",
       "lat": 39.6339,
       "lon": -105.8175,
       "ft": 14275,
-      "summited": false,
+      "summited": true,
       "planned": false,
       "ranked": true,
       "cls": 2,
       "mi": 8.0,
       "gain": 3000,
       "drive": "1h10",
-      "group": "Grays+Torreys"
+      "group": "Grays+Torreys",
+      "attempted": false
     },
     {
       "name": "Torreys Peak",
       "lat": 39.6427,
       "lon": -105.8213,
       "ft": 14272,
-      "summited": false,
+      "summited": true,
       "planned": false,
       "ranked": true,
       "cls": 2,
       "mi": 8.5,
       "gain": 3300,
       "drive": "1h10",
-      "group": "Grays+Torreys"
+      "group": "Grays+Torreys",
+      "attempted": false
     },
     {
       "name": "Quandary Peak",
@@ -1745,7 +1813,8 @@
       "mi": 6.75,
       "gain": 3450,
       "drive": "1h30",
-      "group": "Quandary"
+      "group": "Quandary",
+      "attempted": false
     },
     {
       "name": "Mt. Evans",
@@ -1759,7 +1828,8 @@
       "mi": 5.5,
       "gain": 2000,
       "drive": "1h20",
-      "group": "Evans"
+      "group": "Evans",
+      "attempted": false
     },
     {
       "name": "Longs Peak",
@@ -1768,7 +1838,8 @@
       "ft": 14259,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Wilson",
@@ -1777,7 +1848,8 @@
       "ft": 14252,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Shavano",
@@ -1791,7 +1863,8 @@
       "mi": 9.0,
       "gain": 4400,
       "drive": "2h40",
-      "group": "Shavano+Tabeguache"
+      "group": "Shavano+Tabeguache",
+      "attempted": false
     },
     {
       "name": "Mt. Princeton",
@@ -1805,7 +1878,8 @@
       "mi": 6.5,
       "gain": 3200,
       "drive": "2h30",
-      "group": "Princeton"
+      "group": "Princeton",
+      "attempted": false
     },
     {
       "name": "Mt. Belford",
@@ -1819,7 +1893,8 @@
       "mi": 8.0,
       "gain": 4500,
       "drive": "2h30",
-      "group": "Belford+Oxford"
+      "group": "Belford+Oxford",
+      "attempted": false
     },
     {
       "name": "Crestone Needle",
@@ -1828,7 +1903,8 @@
       "ft": 14197,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Yale",
@@ -1842,7 +1918,8 @@
       "mi": 9.5,
       "gain": 4300,
       "drive": "2h20",
-      "group": "Yale"
+      "group": "Yale",
+      "attempted": false
     },
     {
       "name": "Mt. Bross",
@@ -1856,7 +1933,8 @@
       "mi": 1.5,
       "gain": 500,
       "drive": "1h50",
-      "group": "DeCaLiBron"
+      "group": "DeCaLiBron",
+      "attempted": false
     },
     {
       "name": "Kit Carson Peak",
@@ -1865,7 +1943,8 @@
       "ft": 14165,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Maroon Peak",
@@ -1874,7 +1953,8 @@
       "ft": 14163,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Tabeguache Peak",
@@ -1888,7 +1968,8 @@
       "mi": 11.0,
       "gain": 4900,
       "drive": "2h40",
-      "group": "Shavano+Tabeguache"
+      "group": "Shavano+Tabeguache",
+      "attempted": false
     },
     {
       "name": "Mt. Oxford",
@@ -1902,7 +1983,8 @@
       "mi": 11.0,
       "gain": 5400,
       "drive": "2h30",
-      "group": "Belford+Oxford"
+      "group": "Belford+Oxford",
+      "attempted": false
     },
     {
       "name": "Mt. Sneffels",
@@ -1916,7 +1998,8 @@
       "mi": 6.0,
       "gain": 2900,
       "drive": "6h00",
-      "group": "Sneffels"
+      "group": "Sneffels",
+      "attempted": false
     },
     {
       "name": "Mt. Democrat",
@@ -1930,7 +2013,8 @@
       "mi": 3.5,
       "gain": 2100,
       "drive": "1h50",
-      "group": "DeCaLiBron"
+      "group": "DeCaLiBron",
+      "attempted": false
     },
     {
       "name": "Capitol Peak",
@@ -1939,7 +2023,8 @@
       "ft": 14130,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Pikes Peak",
@@ -1953,7 +2038,8 @@
       "mi": 13.0,
       "gain": 7400,
       "drive": "1h30",
-      "group": "Pikes"
+      "group": "Pikes",
+      "attempted": false
     },
     {
       "name": "Snowmass Mountain",
@@ -1962,7 +2048,8 @@
       "ft": 14092,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Eolus",
@@ -1971,7 +2058,8 @@
       "ft": 14083,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Windom Peak",
@@ -1980,7 +2068,8 @@
       "ft": 14082,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Challenger Point",
@@ -1989,7 +2078,8 @@
       "ft": 14081,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Columbia",
@@ -1998,7 +2088,8 @@
       "ft": 14073,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Missouri Mountain",
@@ -2007,7 +2098,8 @@
       "ft": 14067,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Humboldt Peak",
@@ -2016,7 +2108,8 @@
       "ft": 14064,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Bierstadt",
@@ -2030,7 +2123,8 @@
       "mi": 7.0,
       "gain": 2850,
       "drive": "1h15",
-      "group": "Bierstadt"
+      "group": "Bierstadt",
+      "attempted": false
     },
     {
       "name": "Sunlight Peak",
@@ -2039,7 +2133,8 @@
       "ft": 14059,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Handies Peak",
@@ -2053,7 +2148,8 @@
       "mi": 5.5,
       "gain": 2500,
       "drive": "6h00",
-      "group": "Handies"
+      "group": "Handies",
+      "attempted": false
     },
     {
       "name": "Culebra Peak",
@@ -2062,7 +2158,8 @@
       "ft": 14047,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Lindsey",
@@ -2071,7 +2168,8 @@
       "ft": 14042,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Ellingwood Point",
@@ -2080,7 +2178,8 @@
       "ft": 14042,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Little Bear Peak",
@@ -2089,7 +2188,8 @@
       "ft": 14037,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Mt. Sherman",
@@ -2103,7 +2203,8 @@
       "mi": 5.25,
       "gain": 2100,
       "drive": "1h50",
-      "group": "Sherman"
+      "group": "Sherman",
+      "attempted": false
     },
     {
       "name": "Redcloud Peak",
@@ -2117,7 +2218,8 @@
       "mi": 9.0,
       "gain": 3700,
       "drive": "6h00",
-      "group": "Redcloud+Sunshine"
+      "group": "Redcloud+Sunshine",
+      "attempted": false
     },
     {
       "name": "Pyramid Peak",
@@ -2126,7 +2228,8 @@
       "ft": 14018,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Wilson Peak",
@@ -2135,7 +2238,8 @@
       "ft": 14017,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Wetterhorn Peak",
@@ -2144,7 +2248,8 @@
       "ft": 14015,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "San Luis Peak",
@@ -2158,7 +2263,8 @@
       "mi": 13.5,
       "gain": 3600,
       "drive": "5h00",
-      "group": "San Luis"
+      "group": "San Luis",
+      "attempted": false
     },
     {
       "name": "Mt. of the Holy Cross",
@@ -2167,7 +2273,8 @@
       "ft": 14005,
       "summited": false,
       "planned": false,
-      "ranked": true
+      "ranked": true,
+      "attempted": false
     },
     {
       "name": "Huron Peak",
@@ -2181,7 +2288,8 @@
       "mi": 6.5,
       "gain": 3500,
       "drive": "2h30",
-      "group": "Huron"
+      "group": "Huron",
+      "attempted": false
     },
     {
       "name": "Sunshine Peak",
@@ -2195,7 +2303,8 @@
       "mi": 11.5,
       "gain": 4400,
       "drive": "6h00",
-      "group": "Redcloud+Sunshine"
+      "group": "Redcloud+Sunshine",
+      "attempted": false
     },
     {
       "name": "Mt. Cameron",
@@ -2209,7 +2318,8 @@
       "mi": 1.0,
       "gain": 500,
       "drive": "1h50",
-      "group": "DeCaLiBron"
+      "group": "DeCaLiBron",
+      "attempted": false
     },
     {
       "name": "El Diente Peak",
@@ -2218,7 +2328,8 @@
       "ft": 14159,
       "summited": false,
       "planned": false,
-      "ranked": false
+      "ranked": false,
+      "attempted": false
     },
     {
       "name": "Conundrum Peak",
@@ -2227,7 +2338,8 @@
       "ft": 14060,
       "summited": false,
       "planned": false,
-      "ranked": false
+      "ranked": false,
+      "attempted": false
     },
     {
       "name": "North Eolus",
@@ -2236,7 +2348,8 @@
       "ft": 14039,
       "summited": false,
       "planned": false,
-      "ranked": false
+      "ranked": false,
+      "attempted": false
     },
     {
       "name": "North Maroon Peak",
@@ -2245,7 +2358,8 @@
       "ft": 14014,
       "summited": false,
       "planned": false,
-      "ranked": false
+      "ranked": false,
+      "attempted": false
     }
   ],
   "_ftNote": "summited:true when you top out. planned:true shows it gold on the Colorado view."
